@@ -1,16 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ButtonContainer from './style';
 
-export default function index(objectValues) {
-  const { test, name } = objectValues;
+function Button({ children }) {
+  const { test, name } = children;
   return (
-    <ButtonContainer>
-      <button
-        data-testid={ test }
-        type="button"
-      >
-        { name }
-      </button>
+    <ButtonContainer
+      data-testid={ test }
+      type="button"
+    >
+      { name }
     </ButtonContainer>
   );
 }
+
+Button.propTypes = {
+  children: PropTypes.shape({
+    test: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default Button;
