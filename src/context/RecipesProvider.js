@@ -11,7 +11,7 @@ function RecipesProvider({ children }) {
   };
 
   return (
-    <RecipesContext value={ obj }>
+    <RecipesContext value={ obj } displayName="Context Display Name">
       { children }
     </RecipesContext>
   );
