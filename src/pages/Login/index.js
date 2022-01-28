@@ -4,8 +4,18 @@ import { LoginContainer, Logo, FormContainer } from './style';
 import logo from '../../assets/images/logo.png';
 
 function Login() {
-  const inputParams = {
+  const emailInput = {
+    test: 'cu',
+    name: 'Email',
+    type: 'text',
+    handleChange: () => {},
+  };
 
+  const passwordInput = {
+    test: 'cu',
+    name: 'Password',
+    type: 'password',
+    handleChange: () => {},
   };
 
   const buttonParams = {
@@ -18,8 +28,8 @@ function Login() {
         src={ logo }
       />
       <FormContainer>
-        <Input />
-        <Input />
+        <Input inputValues={ emailInput } />
+        <Input inputValues={ passwordInput } />
         <Button>
           { buttonParams }
         </Button>

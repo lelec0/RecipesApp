@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InputContainer from './style';
 
-function Input({ children }) {
-  const { test, name, type, handleChange } = children;
+function Input({ inputValues }) {
+  const { test, name, type, handleChange } = inputValues;
+
   return (
     <InputContainer
       type={ type }
@@ -11,13 +12,12 @@ function Input({ children }) {
       placeholder={ name }
       name={ name }
       onChange={ handleChange }
-      id={ name }
     />
   );
 }
 
 Input.propTypes = {
-  children: PropTypes.shape({
+  inputValues: PropTypes.shape({
     test: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
