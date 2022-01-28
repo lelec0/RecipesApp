@@ -20,16 +20,12 @@ function Header() {
       </div>
       {
         btnSearchIcon && (
-          <button
-            type="button"
+          <img
+            src={ searchIcon }
+            alt="Explore Icon"
             data-testid="search-top-btn"
-          >
-            <img
-              src={ searchIcon }
-              alt="Explore Icon"
-              data-testid="search-input"
-            />
-          </button>)
+          />
+        )
       }
     </div>
   );
