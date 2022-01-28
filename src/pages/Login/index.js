@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Input, Button } from '../../components';
+import { LoginContainer, Logo, FormContainer } from './style';
+import logo from '../../assets/images/logo.png';
+import { LoginContext } from '../../context/LoginProvider';
 
 function Login() {
+  const { emailInput, passwordInput, buttonParams } = useContext(LoginContext);
+
   return (
-    <div>
-      Login
-    </div>
+    <LoginContainer>
+      <Logo
+        src={ logo }
+      />
+      <FormContainer>
+        <Input inputValues={ emailInput } />
+        <Input inputValues={ passwordInput } />
+        <Button>
+          { buttonParams }
+        </Button>
+      </FormContainer>
+    </LoginContainer>
   );
 }
 

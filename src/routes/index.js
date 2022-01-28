@@ -1,20 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import {
-  Login,
-  Foods,
-  Drinks,
-  FoodsInProgress,
-  DrinksInProgress,
-  Explore,
-  ExploreFood,
-  ExploreDrinks,
-  ExploreFoodsIngredients,
-  ExploreDrinksIngredients,
-  Nationalities,
-  Profile,
-  DoneRecipes,
-  FavoriteRecipes,
+  Login, Foods, Drinks, FoodsInProgress,
+  DrinksInProgress, Explore, ExploreFood, ExploreDrinks,
+  ExploreFoodsIngredients, ExploreDrinksIngredients,
+  Nationalities, Profile, DoneRecipes, FavoriteRecipes,
 } from '../pages';
 
 function Routes() {
