@@ -6,21 +6,12 @@ import {
   ExploreFoodsIngredients, ExploreDrinksIngredients,
   Nationalities, Profile, DoneRecipes, FavoriteRecipes,
 } from '../pages';
-import LoginProvider from '../context/LoginProvider';
 
 function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={ () => (
-            <LoginProvider>
-              <Login />
-            </LoginProvider>
-          ) }
-        />
+        <Route exact path="/" component={ Login } />
         <Route exact path="/foods:id" component={ Foods } />
         <Route exact path="/drinks:id" component={ Drinks } />
         <Route exact path="/foods:id/in-progress" component={ FoodsInProgress } />

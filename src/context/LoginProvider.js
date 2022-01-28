@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import LoginContext from './LoginContext';
+import React, { useState, createContext } from 'react';
+
+export const LoginContext = createContext();
 
 function RecipesProvider({ children }) {
   const [email, setEmail] = useState('');
