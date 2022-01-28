@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import profileIcon from '../../assets/images/profileIcon.svg';
+import { HeaderContext } from '../../context/HeaderProvider';
 
 function Header() {
+  const { title, searchIcon } = useContext(HeaderContext);
   return (
     <div>
       <img
@@ -13,14 +15,17 @@ function Header() {
       <div
         data-testid="page-title"
       >
-        titulo
+        { title }
       </div>
-      <button
-        type="button"
-        data-testid="search-top-btn"
-      >
-        botao
-      </button>
+      {
+        searchIcon && (
+          <button
+            type="button"
+            data-testid="search-top-btn"
+          >
+            { searchIcon }
+          </button>)
+      }
     </div>
   );
 }
