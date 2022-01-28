@@ -1,11 +1,14 @@
 import React from 'react';
+import FoodsProvider from './context/FoodsProvider';
 import RecipesProvider from './context/RecipesProvider';
 import Routes from './routes';
 
 function App() {
   return (
     <RecipesProvider>
-      <Routes />
+      <FoodsProvider>
+        <Routes />
+      </FoodsProvider>
     </RecipesProvider>
   );
 }

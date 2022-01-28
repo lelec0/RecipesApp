@@ -5,6 +5,13 @@ export async function requestCategory() {
   return categoryJson;
 }
 
+export async function requestFoods() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const foodsFetch = await fetch(URL);
+  const foodsJson = await foodsFetch.json();
+  return foodsJson;
+}
+
 export async function requestNationality() {
   const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
   const nationalityFetch = await fetch(URL);
