@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { Input, Button } from '../../components';
+import { Input } from '../../components';
 import { LoginContainer, Logo, FormContainer } from './style';
 import logo from '../../assets/images/logo.png';
 import { LoginContext } from '../../context/LoginProvider';
+import LoginButton from '../../components/LoginButton';
 
 function Login() {
   const { emailInput, passwordInput, buttonParams } = useContext(LoginContext);
@@ -15,9 +16,9 @@ function Login() {
       <FormContainer>
         <Input inputValues={ emailInput } />
         <Input inputValues={ passwordInput } />
-        <Button>
+        <LoginButton>
           { buttonParams }
-        </Button>
+        </LoginButton>
       </FormContainer>
     </LoginContainer>
   );

@@ -1,28 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FoodContainer from './style';
+import { FoodCardContainer, CardImage, CardButton, CardTitle } from './style';
 
-function FoodCard({ children }) {
-  const { test, imgSrc, imagAlt, link } = children;
+function FoodCard({ foods }) {
+  const { strMeal, strMealThumb } = foods;
   return (
-    <FoodContainer>
-      <Link to={ link }>
-        <button type="button">
-          <img data-testid={ test } src={ imgSrc } alt={ imagAlt } />
-        </button>
-      </Link>
-    </FoodContainer>
+    <FoodCardContainer>
+      {/* <Link to={ link }> */}
+      <CardButton type="button">
+        <CardImage
+          src={ strMealThumb }
+          alt={ strMealThumb }
+        />
+        <CardTitle>
+          { strMeal }
+        </CardTitle>
+      </CardButton>
+      {/* </Link> */}
+    </FoodCardContainer>
 
   );
 }
 
 FoodCard.propTypes = {
-  children: PropTypes.shape({
-    test: PropTypes.string.isRequired,
-    imgSrc: PropTypes.string.isRequired,
-    imagAlt: PropTypes.string.isRequired,
-    link: PropTypes.bool.isRequired,
+  foods: PropTypes.shape({
+    strMeal: PropTypes.string.isRequired,
+    strMealThumb: PropTypes.string.isRequired,
   }).isRequired,
 };
 

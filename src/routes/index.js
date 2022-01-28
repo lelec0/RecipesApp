@@ -12,6 +12,7 @@ function Routes() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={ Login } />
+        <Route exact path="/foods" component={ Foods } />
         <Route exact path="/foods:id" component={ Foods } />
         <Route exact path="/drinks:id" component={ Drinks } />
         <Route exact path="/foods:id/in-progress" component={ FoodsInProgress } />
