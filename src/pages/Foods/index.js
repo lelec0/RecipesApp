@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../../components/Header';
 import { HeaderContext } from '../../context/HeaderProvider';
 
 function Foods() {
-  const { title } = useContext(HeaderContext);
-  console.log(title);
-  // useEffect(() => setTitle('foods'), [setTitle]);
+  const { setTitle, setBtnSearchIcon } = useContext(HeaderContext);
+
+  useEffect(() => {
+    setTitle('Foods');
+    setBtnSearchIcon(true);
+  }, [setTitle, setBtnSearchIcon]);
 
   return (
     <div>
-      Foods
       <Header />
     </div>
   );

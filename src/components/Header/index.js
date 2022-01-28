@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import profileIcon from '../../assets/images/profileIcon.svg';
+import searchIcon from '../../assets/images/searchIcon.svg';
 import { HeaderContext } from '../../context/HeaderProvider';
 
 function Header() {
-  const { title, searchIcon } = useContext(HeaderContext);
+  const { title, btnSearchIcon } = useContext(HeaderContext);
   return (
     <div>
       <img
@@ -18,12 +19,16 @@ function Header() {
         { title }
       </div>
       {
-        searchIcon && (
+        btnSearchIcon && (
           <button
             type="button"
             data-testid="search-top-btn"
           >
-            { searchIcon }
+            <img
+              src={ searchIcon }
+              alt="Explore Icon"
+              data-testid="search-input"
+            />
           </button>)
       }
     </div>

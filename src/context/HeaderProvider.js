@@ -5,13 +5,13 @@ export const HeaderContext = createContext();
 
 function HeaderProvider({ children }) {
   const [title, setTitle] = useState('');
-  const [searchIcon, setSearchIcon] = useState(false);
+  const [btnSearchIcon, setBtnSearchIcon] = useState(false);
 
   const obj = {
     title,
     setTitle,
-    searchIcon,
-    setSearchIcon,
+    btnSearchIcon,
+    setBtnSearchIcon,
   };
 
   return (
