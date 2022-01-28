@@ -8,6 +8,7 @@ function Button({ children }) {
     <ButtonContainer
       data-testid={ test }
       type="button"
+      // disabled
     >
       { name }
     </ButtonContainer>

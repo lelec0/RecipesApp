@@ -13,6 +13,7 @@ function Input({ inputValues }) {
       name={ name }
       value={ value }
       onChange={ loginHandleChange }
+      autoComplete="off"
     />
   );
 }
