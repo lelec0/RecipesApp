@@ -5,20 +5,21 @@ import logo from '../../assets/images/logo.png';
 
 function Login() {
   const emailInput = {
-    test: 'cu',
+    test: 'email-input',
     name: 'Email',
     type: 'text',
     handleChange: () => {},
   };
 
   const passwordInput = {
-    test: 'cu',
+    test: 'password-input',
     name: 'Password',
     type: 'password',
     handleChange: () => {},
   };
 
   const buttonParams = {
+    test: 'login-submit-btn',
     name: 'Login',
   };
 

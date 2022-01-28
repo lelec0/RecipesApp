@@ -10,6 +10,10 @@ function RecipesProvider({ children }) {
     setState1,
   };
 
+  const handleChange = () => {
+    
+  };
+
   return (
     <RecipesContext value={ obj } displayName="Context Display Name">
       { children }
