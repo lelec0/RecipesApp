@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import InputContainer from './style';
 
 function Input({ inputValues }) {
-  const { test, name, type, handleChange } = inputValues;
+  const { test, name, type, loginHandleChange, placeholder, value } = inputValues;
 
   return (
     <InputContainer
       type={ type }
       data-testid={ test }
-      placeholder={ name }
+      placeholder={ placeholder }
       name={ name }
-      onChange={ handleChange }
+      value={ value }
+      onChange={ loginHandleChange }
     />
   );
 }
@@ -21,7 +22,9 @@ Input.propTypes = {
     test: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    handleChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    loginHandleChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
   }).isRequired,
 };
 

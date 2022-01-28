@@ -3,11 +3,41 @@ import React, { useState } from 'react';
 import LoginContext from './LoginContext';
 
 function RecipesProvider({ children }) {
-  const [state1, setState1] = useState('oie');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loginHandleChange = ({ target: { name, value } }) => (
+    name === 'email' ? setEmail(value) : setPassword(value)
+  );
+
+  const emailInput = {
+    test: 'email-input',
+    name: 'email',
+    type: 'text',
+    value: email,
+    placeholder: 'Email',
+    loginHandleChange,
+  };
+
+  const passwordInput = {
+    test: 'password-input',
+    name: 'password',
+    type: 'password',
+    value: password,
+    placeholder: 'Password',
+    loginHandleChange,
+  };
+
+  const buttonParams = {
+    test: 'login-submit-btn',
+    name: 'Login',
+  };
 
   const obj = {
-    state1,
-    setState1,
+    emailInput,
+    passwordInput,
+    buttonParams,
+    loginHandleChange,
   };
 
   return (

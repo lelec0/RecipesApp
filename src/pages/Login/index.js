@@ -5,26 +5,7 @@ import logo from '../../assets/images/logo.png';
 import LoginContext from '../../context/LoginContext';
 
 function Login() {
-  const { state1 } = useContext(LoginContext);
-  console.log(state1);
-  const emailInput = {
-    test: 'email-input',
-    name: 'Email',
-    type: 'text',
-    handleChange: () => {},
-  };
-
-  const passwordInput = {
-    test: 'password-input',
-    name: 'Password',
-    type: 'password',
-    handleChange: () => {},
-  };
-
-  const buttonParams = {
-    test: 'login-submit-btn',
-    name: 'Login',
-  };
+  const { emailInput, passwordInput, buttonParams } = useContext(LoginContext);
 
   return (
     <LoginContainer>
