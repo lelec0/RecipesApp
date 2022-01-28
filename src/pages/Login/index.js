@@ -9,7 +9,6 @@ function Login() {
 
   return (
     <LoginContainer>
-      oi
       <Logo
         src={ logo }
       />
