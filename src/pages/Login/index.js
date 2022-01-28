@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Input, Button } from '../../components';
 import { LoginContainer, Logo, FormContainer } from './style';
 import logo from '../../assets/images/logo.png';
+import LoginContext from '../../context/LoginContext';
 
 function Login() {
+  const { state1 } = useContext(LoginContext);
+  console.log(state1);
   const emailInput = {
     test: 'email-input',
     name: 'Email',
