@@ -22,23 +22,29 @@ describe('1 - Foods Page Header', () => {
     expect(srcUserIcon).toBe(profileIcon);
   });
 
-  it('', () => {
+  it('verifies if the input appears when the user clicks on the search icon', () => {
 
   });
 
-  it('', () => {
+  it('verifies if there are three check boxes', () => {
 
   });
 
-  it('', () => {
+  it('verifies if there is a search button', () => {
+
+  });
+});
+
+describe('2 - Foods Page', () => {
+  it('verifies if there are image cards on the page', () => {
 
   });
 
-  it('', () => {
+  it('verifies if there is a footer in the page', () => {
 
   });
 
-  it('', () => {
+  it('verifies if the footer has three icons', () => {
 
   });
 });
