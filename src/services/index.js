@@ -1,5 +1,5 @@
 export async function requestCategory() {
-  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  const URL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
   const categoryFetch = await fetch(URL);
   const categoryJson = await categoryFetch.json();
   return categoryJson;

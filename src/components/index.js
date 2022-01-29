@@ -1,13 +1,13 @@
 import Input from './Input';
 import Card from './Card';
-import Button from './Button';
+import CategoriesButton from './CategoriesButton';
 import LoginButton from './LoginButton';
 import FoodCard from './FoodCard';
 
 export {
   Input,
   Card,
-  Button,
+  CategoriesButton,
   LoginButton,
   FoodCard,
 };

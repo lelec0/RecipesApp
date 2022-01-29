@@ -10,7 +10,7 @@ function FoodsProvider({ children }) {
 
   const handleCategory = async () => {
     const response = await requestCategory();
-    setCategories(response.meals);
+    setCategories(response.categories);
   };
 
   const handleFoods = async () => {
