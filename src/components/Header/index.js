@@ -4,7 +4,7 @@ import { Input } from '..';
 import profileIcon from '../../assets/images/profileIcon.svg';
 import searchIcon from '../../assets/images/searchIcon.svg';
 import { HeaderContext } from '../../context/HeaderProvider';
-import { HeaderButton, HeaderContainer, HeaderTitle } from './style';
+import { HeaderButton, HeaderContainer, HeaderImage, HeaderTitle } from './style';
 
 function Header() {
   const { title, btnSearchIcon, objInputText,
@@ -18,7 +18,11 @@ function Header() {
     <HeaderContainer>
       <Link to="/profile">
         <HeaderButton type="button">
-          <img data-testid="profile-top-btn" src={ profileIcon } alt="Profile Icon" />
+          <HeaderImage
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="Profile Icon"
+          />
         </HeaderButton>
       </Link>
 
@@ -28,17 +32,25 @@ function Header() {
         { title }
       </HeaderTitle>
       {
-        btnSearchIcon && (
+        btnSearchIcon ? (
           <HeaderButton
             type="button"
             onClick={ () => (
               showSearch === true ? setShowSearch(false) : setShowSearch(true)
             ) }
           >
-            <img
+            <HeaderImage
               data-testid="search-top-btn"
               src={ searchIcon }
               alt="Explore Icon"
+            />
+          </HeaderButton>
+        ) : (
+          <HeaderButton>
+            <HeaderImage
+              src={ searchIcon }
+              alt="Invisible Icon"
+              style={ { display: 'none' } }
             />
           </HeaderButton>
         )

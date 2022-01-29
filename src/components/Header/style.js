@@ -21,3 +21,6 @@ export const HeaderButton = styled.button`
   height: 64px;
   background-color: transparent;
 `;
+
+export const HeaderImage = styled.img`
+`;
