@@ -53,7 +53,7 @@ describe('Login Page Tests', () => {
     const passwordInput = screen.getByTestId(PASSWORD_TESTID);
     const buttonLogin = screen.getByTestId(BTN_LOGIN_TESTID);
 
-    userEvent.type(emailInput, 'potato@test.com');
+    userEvent.type(emailInput, 'pinapple@test.com');
     userEvent.type(passwordInput, '1234567');
     userEvent.click(buttonLogin);
     expect(global.window.location.pathname).toEqual('/foods');
