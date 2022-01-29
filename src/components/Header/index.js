@@ -30,15 +30,15 @@ function Header() {
         btnSearchIcon && (
           <button
             type="button"
-            data-testid="search-input"
+            // data-testid="search-top-btn"
             onClick={ () => (
               showSearch === true ? setShowSearch(false) : setShowSearch(true)
             ) }
           >
             <img
+              data-testid="search-top-btn"
               src={ searchIcon }
               alt="Explore Icon"
-              data-testid="search-top-btn"
             />
           </button>
         )
@@ -46,7 +46,7 @@ function Header() {
 
       {
         showSearch && (
-          <>
+          <div data-testid="search-input">
             <Input inputValues={ objInputText } />
             <Input inputValues={ objInputCheckB1 } />
             Ingredients
@@ -54,7 +54,7 @@ function Header() {
             Name
             <Input inputValues={ objInputCheckB3 } />
             Fisrt Letter
-          </>
+          </div>
         )
       }
     </div>
