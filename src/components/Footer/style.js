@@ -1,8 +1,19 @@
 import styled from 'styled-components';
 
-const FooterContainer = styled.footer`
+export const FooterContainer = styled.footer`
+  width: 100%;
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
+  background-color: #d6d6d6;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 70px;
 `;
 
-export default FooterContainer;
+export const FooterButton = styled.button`
+  border: none;
+  width: 64px;
+  height: 64px;
+  background-color: transparent;
+`;

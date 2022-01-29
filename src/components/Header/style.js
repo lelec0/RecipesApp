@@ -5,7 +5,7 @@ export const HeaderContainer = styled.header`
   box-shadow: 0 5px #961b20;
   display: flex;
   width: 100%;
-  height: 80px;
+  height: 70px;
   align-items: center;
   justify-content: space-around;
   margin-bottom: 25px;
@@ -16,7 +16,6 @@ export const HeaderTitle = styled.h1`
 `;
 
 export const HeaderButton = styled.button`
-  /* background-color: blue; */
   border: none;
   width: 64px;
   height: 64px;
