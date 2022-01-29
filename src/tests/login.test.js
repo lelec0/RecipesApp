@@ -20,14 +20,15 @@ describe('Login Page Tests', () => {
   });
 
   it('tests if the elements are present on the screen', () => {
-    renderWithRouter(<Login />);
+    renderWithRouter(<App />);
+    console.log(renderWithRouter(<Login />));
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
     expect(btnLogin).toBeInTheDocument();
   });
 
   it('tests if the button is disabled if there is a invalid email', () => {
-    renderWithRouter(<Login />);
+    renderWithRouter(<App />);
     userEvent.type(emailInput, 'potato.com');
     expect(btnLogin).toBeDisabled();
   });
