@@ -22,7 +22,7 @@ function RecipesProvider({ children }) {
     }
   };
 
-  const loginHandleChange = ({ target: { type, value } }) => {
+  const handleChange = ({ target: { type, value } }) => {
     validateTest();
     return type === 'email' ? setEmail(value) : setPassword(value);
     // if (type === 'email') {
@@ -48,7 +48,7 @@ function RecipesProvider({ children }) {
     type: 'email',
     value: email,
     placeholder: 'Email',
-    loginHandleChange,
+    handleChange,
   };
 
   const passwordInput = {
@@ -57,7 +57,7 @@ function RecipesProvider({ children }) {
     type: 'password',
     value: password,
     placeholder: 'Password',
-    loginHandleChange,
+    handleChange,
   };
 
   const buttonParams = {
@@ -73,7 +73,7 @@ function RecipesProvider({ children }) {
     emailInput,
     passwordInput,
     buttonParams,
-    loginHandleChange,
+    handleChange,
   };
 
   return (
