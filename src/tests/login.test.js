@@ -26,13 +26,13 @@ describe('Login Page Tests', () => {
     expect(screen.queryByTestId(BTN_LOGIN_TESTID)).toBeInTheDocument();
   });
 
-  it('tests if the button is disabled if there is a invalid email', () => {
+  it('tests if the button is disabled if there is an invalid email or password', () => {
     renderWithRouter(<App />);
     userEvent.type(screen.queryByTestId(EMAIL_TESTID), 'potato.com');
     expect(screen.queryByTestId(BTN_LOGIN_TESTID)).toBeDisabled();
     userEvent.type(screen.queryByTestId(EMAIL_TESTID), 'potato@test.com');
-    userEvent.type(screen.queryByTestId(PASSWORD_TESTID), '1234567');
-    expect(screen.queryByTestId(BTN_LOGIN_TESTID)).not.toBeDisabled();
+    userEvent.type(screen.queryByTestId(PASSWORD_TESTID), '123456');
+    expect(screen.queryByTestId(BTN_LOGIN_TESTID)).toBeDisabled();
   });
 
   it('test if the email and password validation is correct', () => {
