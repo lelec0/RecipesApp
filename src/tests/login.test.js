@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import App from '../App';
+import { Login } from '../pages';
 import renderWithRouter from '../helpers/renderWithRouter';
 import logo from '../assets/images/logo.png';
 
@@ -28,6 +29,7 @@ describe('Login Page Tests', () => {
 
   it('tests if the button is disabled if there is an invalid email or password', () => {
     renderWithRouter(<App />);
+    expect(screen.queryByTestId(BTN_LOGIN_TESTID)).toBeDisabled();
     userEvent.type(screen.queryByTestId(EMAIL_TESTID), 'potato.com');
     expect(screen.queryByTestId(BTN_LOGIN_TESTID)).toBeDisabled();
     userEvent.type(screen.queryByTestId(EMAIL_TESTID), 'potato@test.com');
@@ -48,5 +50,14 @@ describe('Login Page Tests', () => {
 
   it('test if the route is correct when the button is clicked', () => { // testar se o vai pro caminho '/'
     render(<App />);
+    const emailInput = screen.getByTestId(EMAIL_TESTID);
+    const passwordInput = screen.getByTestId(PASSWORD_TESTID);
+    const buttonLogin = screen.getByTestId(BTN_LOGIN_TESTID);
+
+    userEvent.type(emailInput, 'potato@test.com');
+    userEvent.type(passwordInput, '1234567');
+    userEvent.click(buttonLogin);
+    expect(global.window.location.pathname).toEqual('/foods');
+    // https://stackoverflow.com/questions/50977862/how-to-test-url-change-with-jest
   });
 });
