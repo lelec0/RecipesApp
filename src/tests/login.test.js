@@ -10,7 +10,7 @@ const EMAIL_TESTID = 'email-input';
 const PASSWORD_TESTID = 'password-input';
 const BTN_LOGIN_TESTID = 'login-submit-btn';
 
-describe('Login Page Tests', () => {
+describe('Login Page', () => {
   it('tests if the icon appears on the screen', () => {
     renderWithRouter(<App />);
     const iconImage = screen.getByRole('img');
