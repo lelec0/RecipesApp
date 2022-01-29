@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import { HeaderContext } from '../../context/HeaderProvider';
 
 function ExploreDrinksIngredients() {
@@ -11,6 +12,7 @@ function ExploreDrinksIngredients() {
   return (
     <div>
       <Header />
+      <Footer />
     </div>
   );
 }

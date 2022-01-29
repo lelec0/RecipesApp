@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import InputContainer from './style';
 
 function Input({ inputValues }) {
-  const { test, name, type, loginHandleChange, placeholder, value } = inputValues;
+  const { test, name, type, handleChange, placeholder, value } = inputValues;
 
   return (
     <InputContainer
@@ -12,7 +12,7 @@ function Input({ inputValues }) {
       placeholder={ placeholder }
       name={ name }
       value={ value }
-      onChange={ loginHandleChange }
+      onChange={ handleChange }
       autoComplete="off"
     />
   );
@@ -24,7 +24,7 @@ Input.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
-    loginHandleChange: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
   }).isRequired,
 };
