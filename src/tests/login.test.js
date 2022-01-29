@@ -3,45 +3,50 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import App from '../App';
-import Login from '../pages/Login/index';
 import renderWithRouter from '../helpers/renderWithRouter';
+import logo from '../assets/images/logo.png';
 
-const EMAIL_INPUT = 'email-input';
-const PASSWORD_INPUT = 'password-input';
-const BUTTON_LOGIN = 'login-submit-btn';
+const EMAIL_TESTID = 'email-input';
+const PASSWORD_TESTID = 'password-input';
+const BTN_LOGIN_TESTID = 'login-submit-btn';
 
 describe('Login Page Tests', () => {
-  const emailInput = screen.queryByTestId(EMAIL_INPUT);
-  const passwordInput = screen.queryByTestId(PASSWORD_INPUT);
-  const btnLogin = screen.queryByTestId(BUTTON_LOGIN);
-
   it('tests if the icon appears on the screen', () => {
-    render(<App />);
+    renderWithRouter(<App />);
+    const iconImage = screen.getByRole('img');
+    const sourceImage = iconImage.getAttribute('src');
+    expect(iconImage).toBeInTheDocument();
+    expect(sourceImage).toBe(logo);
   });
 
   it('tests if the elements are present on the screen', () => {
     renderWithRouter(<App />);
-    console.log(renderWithRouter(<Login />));
-    expect(emailInput).toBeInTheDocument();
-    expect(passwordInput).toBeInTheDocument();
-    expect(btnLogin).toBeInTheDocument();
+    expect(screen.queryByTestId(EMAIL_TESTID)).toBeInTheDocument();
+    expect(screen.queryByTestId(PASSWORD_TESTID)).toBeInTheDocument();
+    expect(screen.queryByTestId(BTN_LOGIN_TESTID)).toBeInTheDocument();
   });
 
   it('tests if the button is disabled if there is a invalid email', () => {
     renderWithRouter(<App />);
-    userEvent.type(emailInput, 'potato.com');
-    expect(btnLogin).toBeDisabled();
+    userEvent.type(screen.queryByTestId(EMAIL_TESTID), 'potato.com');
+    expect(screen.queryByTestId(BTN_LOGIN_TESTID)).toBeDisabled();
+    userEvent.type(screen.queryByTestId(EMAIL_TESTID), 'potato@test.com');
+    userEvent.type(screen.queryByTestId(PASSWORD_TESTID), '1234567');
+    expect(screen.queryByTestId(BTN_LOGIN_TESTID)).not.toBeDisabled();
   });
 
-  it('test if the email and password validation is correct', () => { // testar se os email e senha tao rolando
+  it('test if the email and password validation is correct', () => {
     render(<App />);
+    const emailInput = screen.getByTestId(EMAIL_TESTID);
+    const passwordInput = screen.getByTestId(PASSWORD_TESTID);
+    const buttonLogin = screen.getByTestId(BTN_LOGIN_TESTID);
+
+    userEvent.type(emailInput, 'potato@test.com');
+    userEvent.type(passwordInput, '1234567');
+    expect(buttonLogin).not.toBeDisabled();
   });
 
   it('test if the route is correct when the button is clicked', () => { // testar se o vai pro caminho '/'
     render(<App />);
   });
-});
-
-describe('', () => {
-
 });
