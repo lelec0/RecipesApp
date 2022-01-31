@@ -44,7 +44,13 @@ describe('1 - Foods Page Header', () => {
   });
 
   it('verifies if there is a search button', () => {
-
+    renderWithRouter(<Foods />);
+    let searchBtn = screen.queryByText('Search');
+    expect(searchBtn).not.toBeInTheDocument();
+    const magnifierIcon = screen.getAllByRole('img')[1];
+    userEvent.click(magnifierIcon);
+    searchBtn = screen.getByText('Search');
+    expect(searchBtn).toBeInTheDocument();
   });
 });
 
