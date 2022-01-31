@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { HeaderContext } from '../../context/HeaderProvider';
+import RecipesContext from '../../context/RecipesContext';
 
 function Drinks() {
-  const { setTitle, setBtnSearchIcon } = useContext(HeaderContext);
+  const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
 
   useEffect(() => {
     setTitle('Drinks');

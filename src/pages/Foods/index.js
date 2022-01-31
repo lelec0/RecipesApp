@@ -9,7 +9,7 @@ import { requestCategory, requestFoods } from '../../services';
 function Foods() {
   /* const { categories, foods } = useContext(FoodsContext);
   console.log(categories); */
-  const { setTitle, setBtnSearchIcon } = useContext(RecipesContext); // ok
+  const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [categories, setCategories] = useState();
   const [foods, setFoods] = useState();
   const maxCategories = 6;
