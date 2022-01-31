@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LoginProvider from './LoginProvider';
-import HeaderProvider from './HeaderProvider';
-import FoodsProvider from './FoodsProvider';
+import RecipesContext from './RecipesContext';
 // https://stackoverflow.com/questions/48363998/two-providers-in-a-react-component
 
 function RecipesProvider({ children }) {
+  const values = {
+
+  };
+
   return (
-    <HeaderProvider>
-      <FoodsProvider>
-        <LoginProvider>
-          { children }
-        </LoginProvider>
-      </FoodsProvider>
-    </HeaderProvider>
+    <RecipesContext.Provider value={ values }>
+      { children }
+    </RecipesContext.Provider>
   );
 }
 
