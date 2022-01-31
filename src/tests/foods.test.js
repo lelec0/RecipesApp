@@ -32,7 +32,7 @@ describe('1 - Foods Page Header', () => {
     expect(searchTextInput).toBeInTheDocument();
   });
 
-  it('verifies if there are three check boxes', () => {
+  it('verifies if there are three radio boxes', () => {
     renderWithRouter(<Foods />);
     const THREE = 3;
     let radioFilters = screen.queryAllByRole('radio');
