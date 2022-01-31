@@ -33,7 +33,14 @@ describe('1 - Foods Page Header', () => {
   });
 
   it('verifies if there are three check boxes', () => {
-
+    renderWithRouter(<Foods />);
+    const THREE = 3;
+    let radioFilters = screen.queryAllByRole('radio');
+    expect(radioFilters).toHaveLength(0);
+    const magnifierIcon = screen.getAllByRole('img')[1];
+    userEvent.click(magnifierIcon);
+    radioFilters = screen.queryAllByRole('radio');
+    expect(radioFilters).toHaveLength(THREE);
   });
 
   it('verifies if there is a search button', () => {
