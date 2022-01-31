@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import renderWithRouter from '../helpers/renderWithRouter';
 import Foods from '../pages/Foods/index';
@@ -22,7 +23,13 @@ describe('1 - Foods Page Header', () => {
   });
 
   it('verifies if the input appears when the user clicks on the search icon', () => {
-
+    renderWithRouter(<Foods />);
+    let searchTextInput = screen.queryByRole('textbox');
+    expect(searchTextInput).not.toBeInTheDocument();
+    const magnifierIcon = screen.getAllByRole('img')[1];
+    userEvent.click(magnifierIcon);
+    searchTextInput = screen.queryByRole('textbox');
+    expect(searchTextInput).toBeInTheDocument();
   });
 
   it('verifies if there are three check boxes', () => {
