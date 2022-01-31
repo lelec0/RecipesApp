@@ -9,8 +9,8 @@ import profileIcon from '../assets/images/profileIcon.svg';
 describe('1 - Foods Page Header', () => {
   it('verifies search icon, user icon and page title', () => {
     renderWithRouter(<Foods />);
-    const magnifierIcon = screen.getByRole('img');
-    const userIcon = screen.getByRole('img');
+    const magnifierIcon = screen.getAllByRole('img')[1];
+    const userIcon = screen.getAllByRole('img')[0];
     const pageTitle = screen.getByText('Foods');
     const srcMagnifierIcon = magnifierIcon.getAttribute('src');
     const srcUserIcon = userIcon.getAttribute('src');
