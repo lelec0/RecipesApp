@@ -43,6 +43,7 @@ describe('1 - Foods Page Header', () => {
     expect(radioFilters).toHaveLength(THREE);
   });
 
+  // finalizar apos a logica ser aplicada
   it('verifies if there is a search button', () => {
     renderWithRouter(<Foods />);
     let searchBtn = screen.queryByText('Search');
@@ -56,7 +57,7 @@ describe('1 - Foods Page Header', () => {
 
 describe('2 - Foods Page', () => {
   it('verifies if there are image cards on the page', () => {
-
+    renderWithRouter(<Foods />);
   });
 
   it('verifies if there is a footer in the page', () => {
