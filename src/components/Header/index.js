@@ -12,17 +12,37 @@ function Header() {
   const [search, setSearch] = useState('');
   // const [radio, setRadio] = useState('');
 
-  const handleChange = ({ target: { /* type */ value } }) => (
+  // Ingredient => https://www.themealdb.com/api/json/v1/1/filter.php?i={ingrediente}
+  // Name => https://www.themealdb.com/api/json/v1/1/search.php?s={nome}
+  const ingredientFetch = async () => {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`);
+    const data = await response.json();
+    return data;
+  };
+
+  // First Letter => https://www.themealdb.com/api/json/v1/1/search.php?f={primeira-letra}
+  const firstLetterFetch = async () => {
+    if (search.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    } else {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search[0]}`);
+      const data = await response.json();
+      return data;
+    }
+  };
+
+  const handleChange = ({ target: { /* type */ value } }) => {
     // type === 'text' ?
-    setSearch(value)
+    console.log(search);
+    return setSearch(value);
     // : setRadio(value)
-  );
+  };
 
   const objInputText = {
-    test: 'exec-search-btn',
+    // test: 'exec-search-btn',
+    test: 'search-input',
     name: 'SearchInput',
     type: 'text',
-    value: search,
     placeholder: 'Search Recipe',
     handleChange,
   };
@@ -49,9 +69,18 @@ function Header() {
     test: 'first-letter-search-radio',
     name: 'radioButton',
     type: 'radio',
-    value: 'FistLetter',
+    value: 'FirstLetter',
     placeholder: 'Fist Letter',
     handleChange,
+  };
+
+  const handleFilter = () => {
+    if (search === 'Ingredients' || search === 'Name') {
+      ingredientFetch();
+    } else if (search === 'FirstLetter') {
+      console.log('else');
+      firstLetterFetch();
+    }
   };
 
   return (
@@ -98,14 +127,22 @@ function Header() {
 
       {
         showSearch && (
-          <div data-testid="search-input">
+          <div>
             <Input inputValues={ objInputText } />
             <Input inputValues={ objInputCheckB1 } />
             Ingredients
             <Input inputValues={ objInputCheckB2 } />
             Name
             <Input inputValues={ objInputCheckB3 } />
-            Fisrt Letter
+            First Letter
+
+            <button
+              type="button"
+              data-testid="exec-search-btn"
+              onClick={ () => handleFilter }
+            >
+              Search
+            </button>
           </div>
         )
       }
