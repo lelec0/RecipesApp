@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+/* import PropTypes from 'prop-types';
 import React, { useState, createContext } from 'react';
 
 export const HeaderContext = createContext();
@@ -73,3 +73,4 @@ HeaderProvider.propTypes = {
 };
 
 export default HeaderProvider;
+ */

@@ -1,11 +1,11 @@
-import React, { createContext, useEffect, useState } from 'react';
+/* import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { requestCategory, requestFoods } from '../services';
 
 export const FoodsContext = createContext();
 
 function FoodsProvider({ children }) {
-  const [categories, setCategories] = useState();
+  /* const [categories, setCategories] = useState();
   const [foods, setFoods] = useState();
 
   const handleCategory = async () => {
@@ -21,9 +21,9 @@ function FoodsProvider({ children }) {
   useEffect(() => {
     handleCategory();
     handleFoods();
-  }, []);
+  }, []); */
 
-  const foodsObj = {
+/*  const foodsObj = {
     categories,
     foods,
   };
@@ -40,3 +40,4 @@ FoodsProvider.propTypes = {
 };
 
 export default FoodsProvider;
+  */

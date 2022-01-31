@@ -1,17 +1,34 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CategoriesButton, FoodCard } from '../../components';
-import { FoodsContext } from '../../context/FoodsProvider';
 import { CategoryContainer, FoodsContainer, MainContainer } from './style';
-import { HeaderContext } from '../../context/HeaderProvider';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import RecipesContext from '../../context/RecipesContext';
+import { requestCategory, requestFoods } from '../../services';
 
 function Foods() {
-  const { categories, foods } = useContext(FoodsContext);
-  console.log(categories);
-  const { setTitle, setBtnSearchIcon } = useContext(HeaderContext);
+  /* const { categories, foods } = useContext(FoodsContext);
+  console.log(categories); */
+  const { setTitle, setBtnSearchIcon } = useContext(RecipesContext); // ok
+  const [categories, setCategories] = useState();
+  const [foods, setFoods] = useState();
   const maxCategories = 6;
   const maxFoods = 12;
+
+  const handleCategory = async () => {
+    const response = await requestCategory();
+    setCategories(response.categories);
+  };
+
+  const handleFoods = async () => {
+    const response = await requestFoods();
+    setFoods(response.meals);
+  };
+
+  useEffect(() => {
+    handleCategory();
+    handleFoods();
+  }, []);
 
   useEffect(() => {
     setTitle('Foods');

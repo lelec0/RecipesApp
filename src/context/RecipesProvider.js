@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 // https://stackoverflow.com/questions/48363998/two-providers-in-a-react-component
 
 function RecipesProvider({ children }) {
+  const [title, setTitle] = useState('');
+  const [btnSearchIcon, setBtnSearchIcon] = useState(false);
+
   const values = {
+    title,
+    setTitle,
+    btnSearchIcon,
+    setBtnSearchIcon,
 
   };
 
