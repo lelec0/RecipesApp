@@ -6,8 +6,8 @@ import RecipesContext from './RecipesContext';
 function RecipesProvider({ children }) {
   const [title, setTitle] = useState('');
   const [btnSearchIcon, setBtnSearchIcon] = useState(false);
-  const [filter, setFilter] = useState('');
-
+  const [filter, setFilter] = useState({ title: '', api: '' });
+  console.log(filter);
   const values = {
     title,
     setTitle,

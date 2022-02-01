@@ -36,7 +36,7 @@ const handleFilter = async (valuesContext) => {
 };
 
 function Header() {
-  const { title, btnSearchIcon } = useContext(RecipesContext);
+  const { title, btnSearchIcon, setFilter } = useContext(RecipesContext);
   const [showSearch, setShowSearch] = useState(false);
   const [search, setSearch] = useState('');
   const [radio, setRadio] = useState('');
@@ -138,7 +138,10 @@ function Header() {
             <button
               type="button"
               data-testid="exec-search-btn"
-              onClick={ () => handleFilter(valuesContext) }
+              onClick={ async () => {
+                const api = await handleFilter(valuesContext);
+                setFilter({ title, api });
+              } }
             >
               Search
             </button>
