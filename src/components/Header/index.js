@@ -4,42 +4,12 @@ import { Input } from '..';
 import profileIcon from '../../assets/images/profileIcon.svg';
 import searchIcon from '../../assets/images/searchIcon.svg';
 import RecipesContext from '../../context/RecipesContext';
-import { foodIngredientFetch, foodNameFetch, foodFirstLetterFetch,
-  drinkFirstLetterFetch, drinkIngredientFetch, drinkNameFetch } from '../../services';
 import { HeaderButton, HeaderContainer, HeaderImage, HeaderTitle } from './style';
 
-const handleFilter = async (valuesContext) => {
-  const {
-    radio, title, search,
-  } = valuesContext;
-  if (radio === 'Ingredients') {
-    return title === 'Foods' ? (
-      foodIngredientFetch(search)
-    ) : (
-      drinkIngredientFetch(search)
-    );
-  }
-  if (radio === 'Name') {
-    return title === 'Foods' ? (
-      foodNameFetch(search)
-    ) : (
-      drinkNameFetch(search)
-    );
-  }
-  if (radio === 'FirstLetter') {
-    return title === 'Foods' ? (
-      foodFirstLetterFetch(search)
-    ) : (
-      drinkFirstLetterFetch(search)
-    );
-  }
-};
-
 function Header() {
-  const { title, btnSearchIcon, setFilter } = useContext(RecipesContext);
+  const { setSearch, title, setRadio,
+    submitApi, btnSearchIcon } = useContext(RecipesContext);
   const [showSearch, setShowSearch] = useState(false);
-  const [search, setSearch] = useState('');
-  const [radio, setRadio] = useState('');
 
   const handleChange = ({ target: { type, value } }) => (
     type === 'text' ? setSearch(value) : setRadio(value)
@@ -52,8 +22,6 @@ function Header() {
     placeholder: 'Search Recipe',
     handleChange,
   };
-
-  const valuesContext = { radio, title, search };
 
   const objInputCheckB1 = {
     test: 'ingredient-search-radio',
@@ -138,10 +106,7 @@ function Header() {
             <button
               type="button"
               data-testid="exec-search-btn"
-              onClick={ async () => {
-                const api = await handleFilter(valuesContext);
-                setFilter({ title, api });
-              } }
+              onClick={ submitApi }
             >
               Search
             </button>

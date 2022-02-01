@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { CategoriesButton, FoodCard } from '../../components';
 import { CategoryContainer, FoodsContainer, MainContainer } from './style';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import RecipesContext from '../../context/RecipesContext';
-import { requestCategory, requestFoods } from '../../services';
+import { requestCategory } from '../../services';
 
 function Foods() {
-  /* const { categories, foods } = useContext(FoodsContext);
-  console.log(categories); */
-  const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
+  const history = useHistory();
+  const { foods,
+    setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [categories, setCategories] = useState();
-  const [foods, setFoods] = useState();
+
   const maxCategories = 6;
   const maxFoods = 12;
 
@@ -20,14 +21,8 @@ function Foods() {
     setCategories(response.categories);
   };
 
-  const handleFoods = async () => {
-    const response = await requestFoods();
-    setFoods(response.meals);
-  };
-
   useEffect(() => {
     handleCategory();
-    handleFoods();
     setTitle('Foods');
     setBtnSearchIcon(true);
   }, [setTitle, setBtnSearchIcon]);
@@ -45,10 +40,13 @@ function Foods() {
           ))
         }
       </CategoryContainer>
-
       <FoodsContainer>
         {
-          foods
+          (foods.length === 1)
+          && history.push('/explore/foods')
+        }
+        {
+          (foods.length !== 1)
           && foods.map((food, index) => (
             index < maxFoods && (
               <FoodCard key={ index } foods={ food } />
