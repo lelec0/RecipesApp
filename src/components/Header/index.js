@@ -10,12 +10,17 @@ function Header() {
   const { title, btnSearchIcon } = useContext(RecipesContext);
   const [showSearch, setShowSearch] = useState(false);
   const [search, setSearch] = useState('');
-  // const [radio, setRadio] = useState('');
+  const [radio, setRadio] = useState('');
 
   // Ingredient => https://www.themealdb.com/api/json/v1/1/filter.php?i={ingrediente}
-  // Name => https://www.themealdb.com/api/json/v1/1/search.php?s={nome}
   const ingredientFetch = async () => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`);
+    const data = await response.json();
+    return data;
+  };
+  // Name => https://www.themealdb.com/api/json/v1/1/search.php?s={nome}
+  const nameFetch = async () => {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
     const data = await response.json();
     return data;
   };
@@ -25,18 +30,15 @@ function Header() {
     if (search.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search[0]}`);
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search[0]}`);
       const data = await response.json();
       return data;
     }
   };
 
-  const handleChange = ({ target: { /* type */ value } }) => {
-    // type === 'text' ?
-    console.log(search);
-    return setSearch(value);
-    // : setRadio(value)
-  };
+  const handleChange = ({ target: { type, value } }) => (
+    type === 'text' ? setSearch(value) : setRadio(value)
+  );
 
   const objInputText = {
     // test: 'exec-search-btn',
@@ -75,11 +77,14 @@ function Header() {
   };
 
   const handleFilter = () => {
-    if (search === 'Ingredients' || search === 'Name') {
+    if (radio === 'Ingredients') {
       ingredientFetch();
-    } else if (search === 'FirstLetter') {
-      console.log('else');
+    } else if (radio === 'Name') {
+      nameFetch();
+    } else if (radio === 'FirstLetter') {
       firstLetterFetch();
+    } else {
+      nameFetch();
     }
   };
 
@@ -139,7 +144,7 @@ function Header() {
             <button
               type="button"
               data-testid="exec-search-btn"
-              onClick={ () => handleFilter }
+              onClick={ handleFilter }
             >
               Search
             </button>
