@@ -32,3 +32,51 @@ export async function requestPhoto(ingredientName) {
   const ingredientsJson = await ingredientsFetch.json();
   return ingredientsJson;
 }
+
+// Ingredient => https://www.themealdb.com/api/json/v1/1/filter.php?i={ingrediente}
+export const foodIngredientFetch = async (search) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`);
+  const data = await response.json();
+  return data;
+};
+// Name => https://www.themealdb.com/api/json/v1/1/search.php?s={nome}
+export const foodNameFetch = async (search) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
+  const data = await response.json();
+  return data;
+};
+
+// First Letter => https://www.themealdb.com/api/json/v1/1/search.php?f={primeira-letra}
+export const foodFirstLetterFetch = async (search) => {
+  if (search.length > 1) {
+    global.alert('Your search must have only 1 (one) character');
+  } else {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search[0]}`);
+    const data = await response.json();
+    return data;
+  }
+};
+
+// Ingredient => https://www.themealdb.com/api/json/v1/1/filter.php?i={ingrediente}
+export const drinkIngredientFetch = async (search) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${search}`);
+  const data = await response.json();
+  return data;
+};
+// Name => https://www.themealdb.com/api/json/v1/1/search.php?s={nome}
+export const drinkNameFetch = async (search) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`);
+  const data = await response.json();
+  return data;
+};
+
+// First Letter => https://www.themealdb.com/api/json/v1/1/search.php?f={primeira-letra}
+export const drinkFirstLetterFetch = async (search) => {
+  if (search.length > 1) {
+    global.alert('Your search must have only 1 (one) character');
+  } else {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${search}`);
+    const data = await response.json();
+    return data;
+  }
+};

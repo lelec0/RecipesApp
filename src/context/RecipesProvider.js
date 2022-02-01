@@ -6,13 +6,15 @@ import RecipesContext from './RecipesContext';
 function RecipesProvider({ children }) {
   const [title, setTitle] = useState('');
   const [btnSearchIcon, setBtnSearchIcon] = useState(false);
+  const [filter, setFilter] = useState('');
 
   const values = {
     title,
     setTitle,
     btnSearchIcon,
     setBtnSearchIcon,
-
+    setFilter,
+    filter,
   };
 
   return (

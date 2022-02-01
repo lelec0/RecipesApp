@@ -28,9 +28,6 @@ function Foods() {
   useEffect(() => {
     handleCategory();
     handleFoods();
-  }, []);
-
-  useEffect(() => {
     setTitle('Foods');
     setBtnSearchIcon(true);
   }, [setTitle, setBtnSearchIcon]);

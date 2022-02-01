@@ -4,7 +4,36 @@ import { Input } from '..';
 import profileIcon from '../../assets/images/profileIcon.svg';
 import searchIcon from '../../assets/images/searchIcon.svg';
 import RecipesContext from '../../context/RecipesContext';
+import { foodIngredientFetch, foodNameFetch, foodFirstLetterFetch,
+  drinkFirstLetterFetch, drinkIngredientFetch, drinkNameFetch } from '../../services';
 import { HeaderButton, HeaderContainer, HeaderImage, HeaderTitle } from './style';
+
+const handleFilter = async (valuesContext) => {
+  const {
+    radio, title, search,
+  } = valuesContext;
+  if (radio === 'Ingredients') {
+    return title === 'Foods' ? (
+      foodIngredientFetch(search)
+    ) : (
+      drinkIngredientFetch(search)
+    );
+  }
+  if (radio === 'Name') {
+    return title === 'Foods' ? (
+      foodNameFetch(search)
+    ) : (
+      drinkNameFetch(search)
+    );
+  }
+  if (radio === 'FirstLetter') {
+    return title === 'Foods' ? (
+      foodFirstLetterFetch(search)
+    ) : (
+      drinkFirstLetterFetch(search)
+    );
+  }
+};
 
 function Header() {
   const { title, btnSearchIcon } = useContext(RecipesContext);
@@ -12,42 +41,19 @@ function Header() {
   const [search, setSearch] = useState('');
   const [radio, setRadio] = useState('');
 
-  // Ingredient => https://www.themealdb.com/api/json/v1/1/filter.php?i={ingrediente}
-  const ingredientFetch = async () => {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`);
-    const data = await response.json();
-    return data;
-  };
-  // Name => https://www.themealdb.com/api/json/v1/1/search.php?s={nome}
-  const nameFetch = async () => {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
-    const data = await response.json();
-    return data;
-  };
-
-  // First Letter => https://www.themealdb.com/api/json/v1/1/search.php?f={primeira-letra}
-  const firstLetterFetch = async () => {
-    if (search.length > 1) {
-      global.alert('Your search must have only 1 (one) character');
-    } else {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search[0]}`);
-      const data = await response.json();
-      return data;
-    }
-  };
-
   const handleChange = ({ target: { type, value } }) => (
     type === 'text' ? setSearch(value) : setRadio(value)
   );
 
   const objInputText = {
-    // test: 'exec-search-btn',
     test: 'search-input',
     name: 'SearchInput',
     type: 'text',
     placeholder: 'Search Recipe',
     handleChange,
   };
+
+  const valuesContext = { radio, title, search };
 
   const objInputCheckB1 = {
     test: 'ingredient-search-radio',
@@ -74,18 +80,6 @@ function Header() {
     value: 'FirstLetter',
     placeholder: 'Fist Letter',
     handleChange,
-  };
-
-  const handleFilter = () => {
-    if (radio === 'Ingredients') {
-      ingredientFetch();
-    } else if (radio === 'Name') {
-      nameFetch();
-    } else if (radio === 'FirstLetter') {
-      firstLetterFetch();
-    } else {
-      nameFetch();
-    }
   };
 
   return (
@@ -144,7 +138,7 @@ function Header() {
             <button
               type="button"
               data-testid="exec-search-btn"
-              onClick={ handleFilter }
+              onClick={ () => handleFilter(valuesContext) }
             >
               Search
             </button>
