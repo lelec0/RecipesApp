@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
-import { foodIngredientFetch, foodNameFetch, foodFirstLetterFetch,
+import { foodIngredientFetch, foodNameFetch, foodFirstLetterFetch, drinkNameFetch,
 } from '../services';
 // https://stackoverflow.com/questions/48363998/two-providers-in-a-react-component
 
@@ -12,6 +12,7 @@ function RecipesProvider({ children }) {
   const [submit, setSubmit] = useState(false);
   const [search, setSearch] = useState('');
   const [foods, setFoods] = useState([]);
+  const [drinks, setDrinks] = useState([]);
 
   const submitApi = async () => {
     console.log(radio);
@@ -31,12 +32,18 @@ function RecipesProvider({ children }) {
   };
 
   const FoodAPI = async () => {
-    const responsee = await foodNameFetch('');
-    setFoods(responsee.meals);
+    const response = await foodNameFetch('');
+    setFoods(response.meals);
+  };
+
+  const DrinkAPI = async () => {
+    const response = await drinkNameFetch('');
+    setFoods(response.drinks);
   };
 
   useEffect(() => {
     FoodAPI();
+    DrinkAPI();
   }, []);
 
   const values = {
@@ -53,6 +60,8 @@ function RecipesProvider({ children }) {
     search,
     foods,
     setFoods,
+    drinks,
+    setDrinks,
   };
 
   return (

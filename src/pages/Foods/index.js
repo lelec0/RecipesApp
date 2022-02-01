@@ -23,6 +23,9 @@ function Foods() {
 
   useEffect(() => {
     handleCategory();
+  }, []);
+
+  useEffect(() => {
     setTitle('Foods');
     setBtnSearchIcon(true);
   }, [setTitle, setBtnSearchIcon]);
@@ -49,7 +52,11 @@ function Foods() {
           (foods.length !== 1)
           && foods.map((food, index) => (
             index < maxFoods && (
-              <FoodCard key={ index } foods={ food } />
+              <FoodCard
+                key={ index }
+                foods={ food }
+                data-testid={ `${index}-recipe-card` }
+              />
             )
           ))
         }
