@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 import { foodIngredientFetch, foodNameFetch, foodFirstLetterFetch, drinkNameFetch,
+  drinkIngredientFetch, drinkFirstLetterFetch,
 } from '../services';
 // https://stackoverflow.com/questions/48363998/two-providers-in-a-react-component
 
@@ -14,9 +15,8 @@ function RecipesProvider({ children }) {
   const [foods, setFoods] = useState([]);
   const [drinks, setDrinks] = useState([]);
 
-  const submitApi = async () => {
-    console.log(radio);
-    if (radio === 'Ingredients') {
+  const setMealsApi = async () => {
+    if (radio === 'Ingredients' && title === 'foods') {
       const response = await foodIngredientFetch(search);
       setFoods(response.meals);
     } else if (radio === 'FirstLetter') {
@@ -31,6 +31,30 @@ function RecipesProvider({ children }) {
     }
   };
 
+  const setDrinksApi = async () => {
+    if (radio === 'Ingredients') {
+      const response = await drinkIngredientFetch(search);
+      setDrinks(response.drinks);
+    } else if (radio === 'FirstLetter') {
+      const response = await drinkFirstLetterFetch(search);
+      setDrinks(response.drinks);
+    } else if (radio === 'Name') {
+      const response = await drinkNameFetch(search);
+      setDrinks(response.drinks);
+    } else if (!radio) {
+      const response = await drinkNameFetch('');
+      setDrinks(response.drinks);
+    }
+  };
+
+  const submitApi = async () => {
+    if (title === 'Drinks') {
+      setDrinksApi();
+    } else if (title === 'Foods') {
+      setMealsApi();
+    }
+  };
+
   const FoodAPI = async () => {
     const response = await foodNameFetch('');
     setFoods(response.meals);
@@ -38,7 +62,7 @@ function RecipesProvider({ children }) {
 
   const DrinkAPI = async () => {
     const response = await drinkNameFetch('');
-    setFoods(response.drinks);
+    setDrinks(response.drinks);
   };
 
   useEffect(() => {

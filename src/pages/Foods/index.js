@@ -47,6 +47,7 @@ function Foods() {
         {
           (foods.length === 1)
           && history.push('/explore/foods')
+          // fazer card aqui que contem, a receita da comida escolhida, se tiver mais de 1 receita apresentar todas as receitas em card
         }
         {
           (foods.length !== 1)

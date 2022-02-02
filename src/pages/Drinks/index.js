@@ -5,7 +5,7 @@ import { CategoryContainer, DrinksContainer, MainContainer } from './style';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import RecipesContext from '../../context/RecipesContext';
-import { requestDrinkCategory } from '../../services';
+import { requestCategoriesDrinks } from '../../services';
 
 function Drinks() {
   const history = useHistory();
@@ -16,8 +16,8 @@ function Drinks() {
   const maxDrinks = 12;
 
   const handleCategory = async () => {
-    const response = await requestDrinkCategory();
-    setCategories(response.drinks);
+    const response = await requestCategoriesDrinks();
+    setCategories(response);
   };
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function Drinks() {
       </CategoryContainer>
 
       <DrinksContainer>
-        { console.log(drinks) }
+        {/* { console.log(drinks) } */}
         {
           (drinks.length === 1)
           && history.push('/explore/foods')

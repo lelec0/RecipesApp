@@ -81,8 +81,9 @@ export const drinkFirstLetterFetch = async (search) => {
   }
 };
 
-export const requestDrinkCategory = async () => {
-  const response = await fetch('www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+export const requestCategoriesDrinks = async () => {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+  const response = await fetch(URL);
   const data = await response.json();
-  return data;
+  return data.drinks;
 };
