@@ -7,22 +7,18 @@ import RecipesContext from '../../context/RecipesContext';
 import { HeaderButton, HeaderContainer, HeaderImage, HeaderTitle } from './style';
 
 function Header() {
-  const { title, btnSearchIcon } = useContext(RecipesContext);
+  const { setSearch, title, setRadio,
+    submitApi, btnSearchIcon } = useContext(RecipesContext);
   const [showSearch, setShowSearch] = useState(false);
-  const [search, setSearch] = useState('');
-  // const [radio, setRadio] = useState('');
 
-  const handleChange = ({ target: { /* type */ value } }) => (
-    // type === 'text' ?
-    setSearch(value)
-    // : setRadio(value)
+  const handleChange = ({ target: { type, value } }) => (
+    type === 'text' ? setSearch(value) : setRadio(value)
   );
 
   const objInputText = {
-    test: 'exec-search-btn',
+    test: 'search-input',
     name: 'SearchInput',
     type: 'text',
-    value: search,
     placeholder: 'Search Recipe',
     handleChange,
   };
@@ -49,7 +45,7 @@ function Header() {
     test: 'first-letter-search-radio',
     name: 'radioButton',
     type: 'radio',
-    value: 'FistLetter',
+    value: 'FirstLetter',
     placeholder: 'Fist Letter',
     handleChange,
   };
@@ -74,13 +70,14 @@ function Header() {
       {
         btnSearchIcon ? (
           <HeaderButton
+            data-testid="search-top-btn"
             type="button"
             onClick={ () => (
               showSearch === true ? setShowSearch(false) : setShowSearch(true)
             ) }
           >
             <HeaderImage
-              data-testid="search-top-btn"
+              // data-testid="search-top-btn"
               src={ searchIcon }
               alt="Explore Icon"
             />
@@ -98,14 +95,22 @@ function Header() {
 
       {
         showSearch && (
-          <div data-testid="search-input">
+          <div>
             <Input inputValues={ objInputText } />
             <Input inputValues={ objInputCheckB1 } />
             Ingredients
             <Input inputValues={ objInputCheckB2 } />
             Name
             <Input inputValues={ objInputCheckB3 } />
-            Fisrt Letter
+            First Letter
+
+            <button
+              type="button"
+              data-testid="exec-search-btn"
+              onClick={ submitApi }
+            >
+              Search
+            </button>
           </div>
         )
       }

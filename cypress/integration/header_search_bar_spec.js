@@ -162,7 +162,7 @@ describe('16 - Redirecione para a tela de detalhes da receita caso apenas uma re
     cy.get('[data-testid="name-search-radio"]').click();
     cy.get('[data-testid="search-input"]').type('Arrabiata');
     cy.get('[data-testid="exec-search-btn"]').click();
-
+    
     cy.location().should((loc) => expect(loc.pathname).to.eq('/foods/52771'));
   });
 

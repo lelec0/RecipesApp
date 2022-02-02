@@ -4,7 +4,6 @@ import { ButtonContainer, CategoryText, CategoryImage } from './style';
 
 function CategoriesButton({ category }) {
   const { strCategory, strCategoryThumb } = category;
-  console.log(category);
   return (
     <ButtonContainer
       type="button"
