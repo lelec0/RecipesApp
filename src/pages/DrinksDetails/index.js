@@ -13,7 +13,7 @@ function DrinksDetails() {
   return (
     <div>
       <Header />
-      <span>oi</span>
+      <span>oi start</span>
       <Footer />
     </div>
   );
