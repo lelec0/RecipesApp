@@ -34,11 +34,12 @@ export async function requestPhoto(ingredientName) {
 }
 
 // Ingredient => https://www.themealdb.com/api/json/v1/1/filter.php?i={ingrediente}
-export const foodIngredientFetch = async (search) => {
+export async function foodIngredients(search) {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`);
   const data = await response.json();
   return data;
-};
+}
+
 // Name => https://www.themealdb.com/api/json/v1/1/search.php?s={nome}
 export const foodNameFetch = async (search) => {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
