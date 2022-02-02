@@ -13,6 +13,7 @@ import Profile from './Profile';
 import DoneRecipes from './DoneRecipes';
 import FavoriteRecipes from './FavoriteRecipes';
 import FoodDetails from './FoodDetails';
+import DrinksDetails from './DrinksDetails';
 
 export {
   Login,
@@ -30,5 +31,5 @@ export {
   DoneRecipes,
   FavoriteRecipes,
   FoodDetails,
-
+  DrinksDetails,
 };

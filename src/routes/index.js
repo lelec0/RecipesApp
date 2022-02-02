@@ -5,7 +5,7 @@ import {
   DrinksInProgress, Explore, ExploreFood, ExploreDrinks,
   ExploreFoodsIngredients, ExploreDrinksIngredients,
   Nationalities, Profile, DoneRecipes, FavoriteRecipes,
-  FoodDetails,
+  FoodDetails, DrinksDetails,
 } from '../pages';
 
 function Routes() {
@@ -15,7 +15,7 @@ function Routes() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/foods" component={ Foods } />
         <Route exact path="/foods:id" component={ FoodDetails } />
-        <Route exact path="/drinks:id" component={ Drinks } />
+        <Route exact path="/drinks:id" component={ DrinksDetails } />
         <Route exact path="/drinks" component={ Drinks } />
         <Route exact path="/foods:id/in-progress" component={ FoodsInProgress } />
         <Route exact path="/drinks:id/in-progress" component={ DrinksInProgress } />

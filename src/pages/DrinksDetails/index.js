@@ -4,10 +4,10 @@ import RecipesContext from '../../context/RecipesContext';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-function FoodDetails() {
+function DrinksDetails() {
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   useEffect(() => {
-    setTitle('Foods Details');
+    setTitle('Drinks Details');
     setBtnSearchIcon(false);
   }, [setTitle, setBtnSearchIcon]);
   return (
@@ -19,4 +19,4 @@ function FoodDetails() {
   );
 }
 
-export default FoodDetails;
+export default DrinksDetails;

@@ -43,10 +43,11 @@ function Foods() {
           ))
         }
       </CategoryContainer>
+      {console.log(foods) }
       <FoodsContainer>
         {
           (foods.length === 1)
-          && history.push(`/explore/foods/${foods.idMeal}`)
+          && history.push(`/foods:${foods[0].idMeal}`)
           // fazer card aqui que contem, a receita da comida escolhida, se tiver mais de 1 receita apresentar todas as receitas em card
         }
         {
