@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 function FoodDetails() {
-  const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
+  const { foods, setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   useEffect(() => {
     setTitle('Foods Details');
     setBtnSearchIcon(false);
@@ -13,7 +13,7 @@ function FoodDetails() {
   return (
     <div>
       <Header />
-      <span>oi</span>
+      <span>{foods[0].strMeal}</span>
       <Footer />
     </div>
   );

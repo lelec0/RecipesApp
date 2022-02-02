@@ -18,7 +18,7 @@ function Foods() {
 
   const handleCategory = async () => {
     const response = await requestCategory();
-    setCategories(response.categories);
+    setCategories(response.meals);
   };
 
   useEffect(() => {
@@ -43,24 +43,23 @@ function Foods() {
           ))
         }
       </CategoryContainer>
-      {console.log(foods) }
+      {/* {console.log(foods) } */}
       <FoodsContainer>
-        {
-          (foods.length === 1)
-          && history.push(`/foods:${foods[0].idMeal}`)
-          // fazer card aqui que contem, a receita da comida escolhida, se tiver mais de 1 receita apresentar todas as receitas em card
-        }
         {
           foods
           && foods.map((food, index) => (
             index < maxFoods && (
               <FoodCard
                 key={ index }
-                foods={ food }
-                data-testid={ `${index}-recipe-card` }
+                food={ food }
+                testID={ index }
               />
             )
           ))
+        }
+        {
+          (foods.length === 1)
+          && history.push(`/foods/${foods[0].idMeal}`)
         }
       </FoodsContainer>
       <Footer />

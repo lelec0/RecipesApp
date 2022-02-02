@@ -3,17 +3,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DrinkCardContainer, CardImage, CardButton, CardTitle } from './style';
 
-function DrinkCard({ drinks }) {
+function DrinkCard({ drinks, testID }) {
   const { strDrink, strDrinkThumb } = drinks;
   return (
-    <DrinkCardContainer>
+    <DrinkCardContainer data-testid={ `${testID}-recipe-card` }>
       {/* <Link to={ link }> */}
       <CardButton type="button">
         <CardImage
+          data-testid={ `${testID}-card-img` }
           src={ strDrinkThumb }
           alt={ strDrink }
         />
-        <CardTitle>
+        <CardTitle data-testid={ `${testID}-card-name` }>
           { strDrink }
         </CardTitle>
       </CardButton>
@@ -24,6 +25,7 @@ function DrinkCard({ drinks }) {
 }
 
 DrinkCard.propTypes = {
+  testID: PropTypes.number.isRequired,
   drinks: PropTypes.shape({
     strDrink: PropTypes.string.isRequired,
     strDrinkThumb: PropTypes.string.isRequired,

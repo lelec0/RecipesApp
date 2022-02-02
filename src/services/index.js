@@ -1,5 +1,6 @@
 export async function requestCategory() {
-  const URL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
+  // const URL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   const categoryFetch = await fetch(URL);
   const categoryJson = await categoryFetch.json();
   return categoryJson;
@@ -42,7 +43,10 @@ export async function foodIngredients(search) {
 
 // Name => https://www.themealdb.com/api/json/v1/1/search.php?s={nome}
 export const foodNameFetch = async (search) => {
-  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
+  const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;
+  // console.log('toSERVICE');
+  console.log(URL);
+  const response = await fetch(URL);
   const data = await response.json();
   return data;
 };
@@ -51,11 +55,11 @@ export const foodNameFetch = async (search) => {
 export const foodFirstLetterFetch = async (search) => {
   if (search.length > 1) {
     global.alert('Your search must have only 1 (one) character');
-  } else {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search[0]}`);
-    const data = await response.json();
-    return data;
+    return [];
   }
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search[0]}`);
+  const data = await response.json();
+  return data.meals;
 };
 
 // Ingredient => https://www.themealdb.com/api/json/v1/1/filter.php?i={ingrediente}
@@ -75,11 +79,11 @@ export const drinkNameFetch = async (search) => {
 export const drinkFirstLetterFetch = async (search) => {
   if (search.length > 1) {
     global.alert('Your search must have only 1 (one) character');
-  } else {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${search}`);
-    const data = await response.json();
-    return data;
+    return [];
   }
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${search}`);
+  const data = await response.json();
+  return data.drinks;
 };
 
 export const requestCategoriesDrinks = async () => {

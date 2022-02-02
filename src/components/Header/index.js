@@ -70,13 +70,14 @@ function Header() {
       {
         btnSearchIcon ? (
           <HeaderButton
+            data-testid="search-top-btn"
             type="button"
             onClick={ () => (
               showSearch === true ? setShowSearch(false) : setShowSearch(true)
             ) }
           >
             <HeaderImage
-              data-testid="search-top-btn"
+              // data-testid="search-top-btn"
               src={ searchIcon }
               alt="Explore Icon"
             />

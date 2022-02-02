@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { CategoriesButton, DrinkCard } from '../../components';
 import { CategoryContainer, DrinksContainer, MainContainer } from './style';
 import Header from '../../components/Header';
@@ -8,8 +8,7 @@ import RecipesContext from '../../context/RecipesContext';
 import { requestCategoriesDrinks } from '../../services';
 
 function Drinks() {
-  // const history = useHistory();
-  // ${food.idMeal}
+  const history = useHistory();
   const { drinks, setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [categories, setCategories] = useState();
 
@@ -58,9 +57,14 @@ function Drinks() {
                 data-testid={ `${index}-recipe-card` }
                 key={ index }
                 drinks={ drink }
+                testID={ index }
               />
             )
           ))
+        }
+        {
+          (drinks.length === 1)
+          && history.push(`/drinks/${drinks[0].idDrink}`)
         }
       </DrinksContainer>
       <Footer />

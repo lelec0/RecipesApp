@@ -16,16 +16,19 @@ function RecipesProvider({ children }) {
   const [drinks, setDrinks] = useState([]);
 
   const setMealsApi = async () => {
+    console.log(radio);
     if (radio === 'Ingredients') {
       const response = await foodIngredients(search);
       setFoods(response.meals);
     } else if (radio === 'FirstLetter') {
       const response = await foodFirstLetterFetch(search);
-      setFoods(response.meals);
+      setFoods(response);
     } else if (radio === 'Name') {
+      // console.log('toCerto');
       const response = await foodNameFetch(search);
       setFoods(response.meals);
     } else if (!radio) {
+      // console.log('toAQUI');
       const response = await foodNameFetch('');
       setFoods(response.meals);
     }
@@ -37,7 +40,7 @@ function RecipesProvider({ children }) {
       setDrinks(response.drinks);
     } else if (radio === 'FirstLetter') {
       const response = await drinkFirstLetterFetch(search);
-      setDrinks(response.drinks);
+      setDrinks(response);
     } else if (radio === 'Name') {
       const response = await drinkNameFetch(search);
       setDrinks(response.drinks);
@@ -58,6 +61,7 @@ function RecipesProvider({ children }) {
   const FoodAPI = async () => {
     const response = await foodNameFetch('');
     setFoods(response.meals);
+    console.log(response);
   };
 
   const DrinkAPI = async () => {
