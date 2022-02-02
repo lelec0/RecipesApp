@@ -12,6 +12,7 @@ import Nationalities from './Nationalities';
 import Profile from './Profile';
 import DoneRecipes from './DoneRecipes';
 import FavoriteRecipes from './FavoriteRecipes';
+import FoodDetails from './FoodDetails';
 
 export {
   Login,
@@ -28,4 +29,6 @@ export {
   Profile,
   DoneRecipes,
   FavoriteRecipes,
+  FoodDetails,
+
 };

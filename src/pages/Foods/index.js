@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { CategoriesButton, FoodCard } from '../../components';
 import { CategoryContainer, FoodsContainer, MainContainer } from './style';
 import Header from '../../components/Header';
@@ -10,6 +11,7 @@ function Foods() {
   const { foods,
     setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [categories, setCategories] = useState();
+  const history = useHistory();
 
   const maxCategories = 6;
   const maxFoods = 12;
@@ -42,11 +44,11 @@ function Foods() {
         }
       </CategoryContainer>
       <FoodsContainer>
-        {/* {
+        {
           (foods.length === 1)
-          && history.push('/explore/foods')
+          && history.push(`/explore/foods/${foods.idMeal}`)
           // fazer card aqui que contem, a receita da comida escolhida, se tiver mais de 1 receita apresentar todas as receitas em card
-        } */}
+        }
         {
           foods
           && foods.map((food, index) => (
