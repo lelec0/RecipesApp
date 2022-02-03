@@ -33,7 +33,7 @@ function FoodDetails() {
       arrayEntrie[0].includes('strMeasure') && arrayEntrie[1] !== ' '
     )));
   // foodApi && console.log(foodApi[0].strYoutube);
-  // console.log(foodApi[0].strYoutube);
+  console.log(foodApi);
   return (
     foodApi && (
       <FoodDetailsContainer>
