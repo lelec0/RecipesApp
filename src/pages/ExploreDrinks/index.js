@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import RecipesContext from '../../context/RecipesContext';
@@ -13,7 +14,7 @@ function ExploreDrinks() {
 
   const randomDrink = () => {
     // criar aqui a funcao que redireciona para randomDrinks
-  }
+  };
 
   return (
     <div>
@@ -37,5 +38,11 @@ function ExploreDrinks() {
     </div>
   );
 }
+
+ExploreDrinks.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default ExploreDrinks;
