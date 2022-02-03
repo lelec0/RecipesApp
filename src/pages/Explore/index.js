@@ -16,16 +16,14 @@ function Explore() {
       <Header />
       <Link to="/explore/foods">
         <button
-          id="btn"
           type="button"
-          data-testid="explore-food"
+          data-testid="explore-foods"
         >
           Explore Foods
         </button>
       </Link>
       <Link to="/explore/drinks">
         <button
-          id="btn"
           type="button"
           data-testid="explore-drinks"
         >
