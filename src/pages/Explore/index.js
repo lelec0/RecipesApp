@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import RecipesContext from '../../context/RecipesContext';
@@ -13,20 +14,24 @@ function Explore() {
   return (
     <div>
       <Header />
-      <button
-        id="btn"
-        type="button"
-        data-testid="explore-food"
-      >
-        Explore Foods
-      </button>
-      <button
-        id="btn"
-        type="button"
-        data-testid="explore-drinks"
-      >
-        Explore Drinks
-      </button>
+      <Link to="/explore/foods">
+        <button
+          id="btn"
+          type="button"
+          data-testid="explore-food"
+        >
+          Explore Foods
+        </button>
+      </Link>
+      <Link to="/explore/drinks">
+        <button
+          id="btn"
+          type="button"
+          data-testid="explore-drinks"
+        >
+          Explore Drinks
+        </button>
+      </Link>
       <Footer />
     </div>
   );
