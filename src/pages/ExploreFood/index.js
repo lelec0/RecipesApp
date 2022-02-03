@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 import RecipesContext from '../../context/RecipesContext';
 
 function ExploreFood() {
-  const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
+  const { setTitle, setBtnSearchIcon, requestRandomFood } = useContext(RecipesContext);
   useEffect(() => {
     setTitle('Explore Foods');
     setBtnSearchIcon(false);
