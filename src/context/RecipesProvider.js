@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 import { foodIngredients, foodNameFetch, foodFirstLetterFetch, drinkNameFetch,
-  drinkIngredientFetch, drinkFirstLetterFetch,
+  drinkIngredientFetch, drinkFirstLetterFetch, CategoryMealsApi, CategoryDrinksApi,
 } from '../services';
 // https://stackoverflow.com/questions/48363998/two-providers-in-a-react-component
 
@@ -14,9 +14,11 @@ function RecipesProvider({ children }) {
   const [search, setSearch] = useState('');
   const [foods, setFoods] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [categoryOn, setCategoryOn] = useState(false);
+  const [backupCat, setBackupCat] = useState('');
 
   const setMealsApi = async () => {
-    console.log(radio);
+    // console.log(radio);
     if (radio === 'Ingredients') {
       const response = await foodIngredients(search);
       setFoods(response.meals);
@@ -52,16 +54,16 @@ function RecipesProvider({ children }) {
 
   const submitApi = async () => {
     if (title === 'Drinks') {
-      setDrinksApi();
+      await setDrinksApi();
     } else if (title === 'Foods') {
-      setMealsApi();
+      await setMealsApi();
     }
+    setCategoryOn(false);
   };
 
   const FoodAPI = async () => {
     const response = await foodNameFetch('');
     setFoods(response.meals);
-    console.log(response);
   };
 
   const DrinkAPI = async () => {
@@ -74,7 +76,34 @@ function RecipesProvider({ children }) {
     DrinkAPI();
   }, []);
 
+  const setCategoryMealsApi = async (strCategory) => {
+    const response = await CategoryMealsApi(strCategory);
+    setFoods(response.meals);
+  };
+
+  const setCategoryDrinksApi = async (strCategory) => {
+    const response = await CategoryDrinksApi(strCategory);
+    setDrinks(response.drinks);
+  };
+
+  const categoryHandle = async (strCategory) => {
+    if ((categoryOn && strCategory === backupCat) || (strCategory === 'All')) {
+      setBackupCat('');
+      await submitApi();
+    } else if (title === 'Drinks') {
+      setCategoryOn(true);
+      setCategoryDrinksApi(strCategory);
+      setBackupCat(strCategory);
+    } else if (title === 'Foods') {
+      setCategoryOn(true);
+      setCategoryMealsApi(strCategory);
+      setBackupCat(strCategory);
+    }
+  };
+
   const values = {
+    setCategoryOn,
+    categoryOn,
     submitApi,
     title,
     setTitle,
@@ -90,6 +119,7 @@ function RecipesProvider({ children }) {
     setFoods,
     drinks,
     setDrinks,
+    categoryHandle,
   };
 
   return (

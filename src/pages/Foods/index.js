@@ -8,12 +8,12 @@ import RecipesContext from '../../context/RecipesContext';
 import { requestCategory } from '../../services';
 
 function Foods() {
-  const { foods,
+  const { foods, categoryOn,
     setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [categories, setCategories] = useState();
   const history = useHistory();
 
-  const maxCategories = 6;
+  const maxCategories = 5;
   const maxFoods = 12;
 
   const handleCategory = async () => {
@@ -42,6 +42,9 @@ function Foods() {
             )
           ))
         }
+        {
+          <CategoriesButton category={ { strCategory: 'All' } } />
+        }
       </CategoryContainer>
       {/* {console.log(foods) } */}
       <FoodsContainer>
@@ -57,8 +60,9 @@ function Foods() {
             )
           ))
         }
+        {/* {console.log(categoryOn)} */}
         {
-          (foods.length === 1)
+          (foods.length === 1 && !categoryOn)
           && history.push(`/foods/${foods[0].idMeal}`)
         }
       </FoodsContainer>
