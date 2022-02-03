@@ -10,6 +10,11 @@ function ExploreFood() {
     setTitle('Explore Foods');
     setBtnSearchIcon(false);
   }, [setTitle, setBtnSearchIcon]);
+
+  const randomFood = () = {
+    // criar aqui a funcao que redireciona para random foods
+  }
+  
   return (
     <div>
       <Header />
@@ -31,6 +36,7 @@ function ExploreFood() {
       </Link>
       <button
         type="button"
+        onClick={ randomFood }
         data-testid="explore-surprise"
       >
         Surprise me!

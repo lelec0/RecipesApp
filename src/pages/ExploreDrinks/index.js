@@ -11,6 +11,10 @@ function ExploreDrinks() {
     setBtnSearchIcon(false);
   }, [setTitle, setBtnSearchIcon]);
 
+  const randomDrink = () => {
+    // criar aqui a funcao que redireciona para randomDrinks
+  }
+
   return (
     <div>
       <Header />
@@ -24,6 +28,7 @@ function ExploreDrinks() {
       </Link>
       <button
         type="button"
+        onClick={ randomDrink }
         data-testid="explore-surprise"
       >
         Surprise me!
