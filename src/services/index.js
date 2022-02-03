@@ -6,6 +6,20 @@ export async function requestCategory() {
   return categoryJson;
 }
 
+export async function CategoryMealsApi(categoryName) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`;
+  const categoryFetch = await fetch(URL);
+  const categoryJson = await categoryFetch.json();
+  return categoryJson;
+}
+
+export async function CategoryDrinksApi(categoryName) {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${categoryName}`;
+  const categoryFetch = await fetch(URL);
+  const categoryJson = await categoryFetch.json();
+  return categoryJson;
+}
+
 export async function requestFoods() {
   const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const foodsFetch = await fetch(URL);

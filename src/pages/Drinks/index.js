@@ -9,10 +9,10 @@ import { requestCategoriesDrinks } from '../../services';
 
 function Drinks() {
   const history = useHistory();
-  const { drinks, setTitle, setBtnSearchIcon } = useContext(RecipesContext);
+  const { drinks, setTitle, categoryOn, setBtnSearchIcon } = useContext(RecipesContext);
   const [categories, setCategories] = useState();
 
-  const maxCategories = 6;
+  const maxCategories = 5;
   const maxDrinks = 12;
 
   const handleCategory = async () => {
@@ -41,6 +41,9 @@ function Drinks() {
             )
           ))
         }
+        {
+          <CategoriesButton category={ { strCategory: 'All' } } />
+        }
       </CategoryContainer>
 
       <DrinksContainer>
@@ -63,7 +66,7 @@ function Drinks() {
           ))
         }
         {
-          (drinks.length === 1)
+          (drinks.length === 1 && !categoryOn)
           && history.push(`/drinks/${drinks[0].idDrink}`)
         }
       </DrinksContainer>
