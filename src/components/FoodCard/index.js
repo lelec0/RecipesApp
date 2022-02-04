@@ -16,7 +16,7 @@ function FoodCard({ food, testID }) {
         )
       ) }
     >
-      <Link to={ `/foods/${idMeal}` }>
+      <Link to={ `/foods/${idMeal}` } style={ { textDecoration: 'none' } }>
         <CardButton type="button">
           <CardImage
             data-testid={ `${testID}-card-img` }
