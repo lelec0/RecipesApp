@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { FoodCard } from '../../components';
 import RecipesContext from '../../context/RecipesContext';
-import { getFoodById } from '../../services';
+import { getFoodById, randomMeal } from '../../services';
 import {
   FoodDetailsContainer,
   FoodDetailsImage,
@@ -13,16 +14,19 @@ function FoodDetails() {
   const { id } = useParams();
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [foodApi, setFoodApi] = useState(false);
+  const [food, setFood] = useState({});
   useEffect(() => {
     setTitle('Foods Details');
     setBtnSearchIcon(false);
     const handleApi = async () => {
       const api = await getFoodById(id);
+      const randomFood = await randomMeal();
       // console.log(Object.entries(api.meals[0]));
       setFoodApi(api.meals);
+      setFood(randomFood.meals[0]);
     };
     handleApi();
-  }, [setFoodApi, id, setTitle, setBtnSearchIcon]);
+  }, [setFoodApi, setFood, id, setTitle, setBtnSearchIcon]);
   // console.log(foodApi);
   const handleIngredient = () => (
     foodApi && Object.entries(foodApi[0]).filter((arrayEntrie) => (
@@ -69,9 +73,9 @@ function FoodDetails() {
         </p>
         <ul>
           {
-            handleIngredient().map((food, index) => (
-              <li key={ food[1] } data-testid={ `${index}-ingredient-name-and-measure` }>
-                { `${food[1]} - ${handlestrMeasure()[index][1]}` }
+            handleIngredient().map((meal, index) => (
+              <li key={ meal[1] } data-testid={ `${index}-ingredient-name-and-measure` }>
+                { `${meal[1]} - ${handlestrMeasure()[index][1]}` }
               </li>
             ))
           }
@@ -91,6 +95,16 @@ function FoodDetails() {
             />
           )
         }
+        <FoodCard
+          testID="0-recomendation-card"
+          food={ food }
+        />
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+        >
+          Start Recipe
+        </button>
       </FoodDetailsContainer>
     )
   );

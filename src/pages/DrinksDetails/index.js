@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+// import { DrinkCard } from '../../components';
 // import { Header, Footer } from '../../components';
 import RecipesContext from '../../context/RecipesContext';
 import { getDrinkById } from '../../services';
@@ -98,10 +99,13 @@ function DrinksDetails() {
                 />
               )
             }
+            {/* <DrinkCard
+              testID="0-recomendation-card"
+              food={ food }
+            /> */}
           </DrinksDetailsContainer>
         )
       }
-      <span>oi start</span>
     </div>
   );
 }
