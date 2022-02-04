@@ -13,4 +13,7 @@ export const FoodsContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
+  /* align-items: center; */
+  /* justify-content: space-evenly; */
+  /* background-color: red; */
 `;
