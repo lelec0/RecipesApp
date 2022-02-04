@@ -1,20 +1,32 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import RecipesContext from '../../context/RecipesContext';
 
-function ExploreDrinks() {
-  const { setTitle, setBtnSearchIcon, requestRandomDrink } = useContext(RecipesContext);
+function ExploreDrinks({ history }) {
+  const [randomDrinkID, setRandomDrinkID] = useState([]);
+  const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   useEffect(() => {
     setTitle('Explore Drinks');
     setBtnSearchIcon(false);
   }, [setTitle, setBtnSearchIcon]);
 
-  const randomDrink = () => {
-    // criar aqui a funcao que redireciona para randomDrinks
+  const requestRandomDrink = async () => {
+    const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
   };
+
+  const randomDrink = () => {
+    history.push(`/drinks/${randomDrinkID}`);
+  };
+
+  useEffect(() => {
+    requestRandomDrink().then(({ drinks }) => setRandomDrinkID(drinks[0].idDrink));
+  }, []);
 
   return (
     <div>

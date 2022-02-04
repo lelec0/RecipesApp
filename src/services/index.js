@@ -107,16 +107,18 @@ export const requestCategoriesDrinks = async () => {
   return data.drinks;
 };
 
-export const requestRandomDrink = async () => {
+// coloquei esse fetch la no arquivo exploreDrinks pq nao estava conseguindo pegar por aqui
+/* export const requestRandomDrink = async () => {
   const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
   const response = await fetch(URL);
   const data = await response.json();
   return data;
-};
+}; */
 
-export const requestRandomFood = async () => {
+// coloquei esse fetch la no arquivo exploreFoods pq nao estava conseguindo pegar por aqui
+/* export const requestRandomFood = async () => {
   const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
   const response = await fetch(URL);
   const data = await response.json();
   return data;
-};
+}; */

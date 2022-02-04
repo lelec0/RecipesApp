@@ -1,20 +1,32 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import RecipesContext from '../../context/RecipesContext';
 
-function ExploreFood() {
-  const { setTitle, setBtnSearchIcon, requestRandomFood } = useContext(RecipesContext);
+function ExploreFood({ history }) {
+  const [randomFoodID, setRandomFoodID] = useState([]);
+  const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   useEffect(() => {
     setTitle('Explore Foods');
     setBtnSearchIcon(false);
   }, [setTitle, setBtnSearchIcon]);
 
-  const randomFood = () = {
-    // criar aqui a funcao que redireciona para random foods
-  }
+  const requestRandomFood = async () => {
+    const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  };
+
+  const randomFood = () => {
+    history.push(`/foods/${randomFoodID}`);
+  };
+
+  useEffect(() => {
+    requestRandomFood().then(({ meals }) => setRandomFoodID(meals[0].idMeal));
+  }, []);
 
   return (
     <div>
