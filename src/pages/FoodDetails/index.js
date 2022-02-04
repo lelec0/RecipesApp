@@ -26,10 +26,14 @@ function FoodDetails() {
     setTitle('Foods Details');
     setBtnSearchIcon(false);
     const handleApi = async () => {
-      const api = await getFoodById(id);
-      const randomFood = await randomMeal();
-      setFoodApi(api.meals);
-      setFood(randomFood.meals[0]);
+      try {
+        const api = await getFoodById(id);
+        const randomFood = await randomMeal();
+        setFoodApi(api.meals);
+        setFood(randomFood.meals[0]);
+      } catch (error) {
+        console.log(error);
+      }
     };
     handleApi();
   }, [setFoodApi, setFood, id, setTitle, setBtnSearchIcon]);

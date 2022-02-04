@@ -95,7 +95,6 @@ function Header() {
           </HeaderButton>
         )
       }
-
       {
         showSearch && (
           <SearchBarContainer>
