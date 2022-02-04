@@ -8,6 +8,12 @@ import {
   FoodDetailsImage,
   FoodDetailsTitle,
   FoodDetailsButton,
+  FoodDetailsCategory,
+  FoodRecipeCategory,
+  FoodDetailsList,
+  FoodDetailsListItem,
+  FoodDetailsInstructions,
+  VideoFrame,
 } from './style';
 
 function FoodDetails() {
@@ -15,29 +21,31 @@ function FoodDetails() {
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [foodApi, setFoodApi] = useState(false);
   const [food, setFood] = useState({});
+
   useEffect(() => {
     setTitle('Foods Details');
     setBtnSearchIcon(false);
     const handleApi = async () => {
       const api = await getFoodById(id);
       const randomFood = await randomMeal();
-      // console.log(Object.entries(api.meals[0]));
       setFoodApi(api.meals);
       setFood(randomFood.meals[0]);
     };
     handleApi();
   }, [setFoodApi, setFood, id, setTitle, setBtnSearchIcon]);
-  // console.log(foodApi);
+
   const handleIngredient = () => (
     foodApi && Object.entries(foodApi[0]).filter((arrayEntrie) => (
       arrayEntrie[0].includes('strIngredient') && arrayEntrie[1] !== ''
-    )));
+    ))
+  );
+
   const handlestrMeasure = () => (
     foodApi && Object.entries(foodApi[0]).filter((arrayEntrie) => (
       arrayEntrie[0].includes('strMeasure') && arrayEntrie[1] !== ' '
-    )));
-  // foodApi && console.log(foodApi[0].strYoutube);
-  console.log(foodApi);
+    ))
+  );
+
   return (
     foodApi && (
       <FoodDetailsContainer>
@@ -51,11 +59,11 @@ function FoodDetails() {
         >
           { foodApi[0].strMeal }
         </FoodDetailsTitle>
-        <FoodDetailsTitle // mudar para categoria
+        <FoodDetailsCategory
           data-testid="recipe-category"
         >
           { foodApi[0].strCategory }
-        </FoodDetailsTitle>
+        </FoodDetailsCategory>
         <FoodDetailsButton
           data-testid="share-btn"
           type="button"
@@ -68,25 +76,28 @@ function FoodDetails() {
         >
           Favorites
         </FoodDetailsButton>
-        <p data-testid="recipe-category">
+        <FoodRecipeCategory data-testid="recipe-category">
           { foodApi.strCategory }
-        </p>
-        <ul>
+        </FoodRecipeCategory>
+        <FoodDetailsList>
           {
             handleIngredient().map((meal, index) => (
-              <li key={ meal[1] } data-testid={ `${index}-ingredient-name-and-measure` }>
+              <FoodDetailsListItem
+                key={ meal[1] }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
                 { `${meal[1]} - ${handlestrMeasure()[index][1]}` }
-              </li>
+              </FoodDetailsListItem>
             ))
           }
-        </ul>
-        <p data-testid="instructions">
+        </FoodDetailsList>
+        <FoodDetailsInstructions data-testid="instructions">
           { foodApi[0].strInstructions }
-        </p>
+        </FoodDetailsInstructions>
         {
           foodApi
           && (
-            <iframe
+            <VideoFrame
               data-testid="video"
               title="Recipe Video"
               width="747"
@@ -99,12 +110,12 @@ function FoodDetails() {
           testID="0-recomendation-card"
           food={ food }
         />
-        <button
+        <FoodDetailsButton
           type="button"
           data-testid="start-recipe-btn"
         >
           Start Recipe
-        </button>
+        </FoodDetailsButton>
       </FoodDetailsContainer>
     )
   );

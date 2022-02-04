@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import { Header, Footer } from '../../components';
 import RecipesContext from '../../context/RecipesContext';
+import { ProfileButton, ProfileContainer, ProfileEmail } from './style';
 
 function Profile() {
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
@@ -28,36 +28,38 @@ function Profile() {
   };
 
   return (
-    <div>
+    <ProfileContainer>
       <Header />
-      <h3 data-testid="profile-email">{getEmail()}</h3>
+      <ProfileEmail data-testid="profile-email">
+        { getEmail() }
+      </ProfileEmail>
       <Link to="/done-recipes">
-        <button
+        <ProfileButton
           type="button"
           data-testid="profile-done-btn"
         >
           Done Recipes
-        </button>
+        </ProfileButton>
       </Link>
       <Link to="/favorite-recipes">
-        <button
+        <ProfileButton
           type="button"
           data-testid="profile-favorite-btn"
         >
           Favorite Recipes
-        </button>
+        </ProfileButton>
       </Link>
       <Link to="/">
-        <button
+        <ProfileButton
           type="button"
           data-testid="profile-logout-btn"
           onClick={ clearLocalStorage }
         >
           Logout
-        </button>
+        </ProfileButton>
       </Link>
       <Footer />
-    </div>
+    </ProfileContainer>
   );
 }
 

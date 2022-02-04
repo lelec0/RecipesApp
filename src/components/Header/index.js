@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Input } from '..';
+// import { Input } from '../../components';
+import Input from '../Input';
 import profileIcon from '../../assets/images/profileIcon.svg';
 import searchIcon from '../../assets/images/searchIcon.svg';
 import RecipesContext from '../../context/RecipesContext';
@@ -73,7 +74,6 @@ function Header() {
       {
         btnSearchIcon ? (
           <HeaderButton
-            // data-testid="search-top-btn"
             type="button"
             onClick={ () => (
               showSearch === true ? setShowSearch(false) : setShowSearch(true)

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { FoodCardContainer, CardImage, CardButton, CardTitle } from './style';
 
 function FoodCard({ food, testID }) {
-  console.log(food);
   const { strMeal, strMealThumb, idMeal } = food;
+
   return (
     <FoodCardContainer
       data-testid={ (

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Input } from '../../components';
+import { Input, LoginButton } from '../../components';
 import { LoginContainer, Logo, FormContainer } from './style';
 import logo from '../../assets/images/logo.png';
-import LoginButton from '../../components/LoginButton';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
+
   // https://dev.to/shareef/react-usestate-hook-is-asynchronous-1hia
   useEffect(() => {
     const validateTest = () => {
@@ -32,7 +32,6 @@ function Login() {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     setLoading(true);
-    // history.push('/food');
   };
 
   const emailInput = {
