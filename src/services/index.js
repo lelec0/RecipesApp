@@ -84,6 +84,21 @@ export const drinkIngredientFetch = async (search) => {
   const data = await response.json();
   return data;
 };
+
+// https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list
+export const drinkIngredientList = async () => {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+  const data = await response.json();
+  return data;
+};
+
+// www.thecocktaildb.com/api/json/v1/1/search.php?i=vodka
+export const drinkIngredientsByName = async (search) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${search}`);
+  const data = await response.json();
+  return data;
+};
+
 // Name => https://www.themealdb.com/api/json/v1/1/search.php?s={nome}
 export const drinkNameFetch = async (search) => {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`);
