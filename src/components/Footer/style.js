@@ -2,6 +2,11 @@ import styled from 'styled-components';
 
 export const FooterContainer = styled.footer`
   width: 100%;
+  height: 100px;
+`;
+
+export const InnerFooterContainer = styled.footer`
+  width: 100%;
   position: fixed;
   bottom: 0;
   background-color: #d6d6d6;
