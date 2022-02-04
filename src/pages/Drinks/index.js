@@ -66,7 +66,7 @@ function Drinks() {
           ))
         }
         {
-          (drinks.length === 1 && !categoryOn)
+          (drinks && drinks.length === 1 && !categoryOn)
           && history.push(`/drinks/${drinks[0].idDrink}`)
         }
       </DrinksContainer>
