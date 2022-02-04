@@ -9,7 +9,8 @@ export const LoginContainer = styled.div`
 `;
 
 export const Logo = styled.img`
-  height: 25%;
+  height: 164px;
+  width: 164px;
   margin-left: 15px;
 `;
 
@@ -27,6 +28,7 @@ export const FormContainer = styled.form`
     border-radius: 5px;
     padding: 1em;
     transition: 0.4s ease-in;
+    margin: 1em;
     /* font-family: inherit; */
 
     &:focus {
