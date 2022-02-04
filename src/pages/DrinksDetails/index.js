@@ -24,6 +24,7 @@ function DrinksDetails() {
   useEffect(() => {
     setTitle('Drinks Details');
     setBtnSearchIcon(false);
+
     const handleApi = async () => {
       const api = await getDrinkById(id);
       const drinkRecommendation = await randomDrink();
