@@ -12,8 +12,8 @@ function RecipesProvider({ children }) {
   const [radio, setRadio] = useState('');
   const [submit, setSubmit] = useState(false);
   const [search, setSearch] = useState('');
-  const [foods, setFoods] = useState([]);
-  const [drinks, setDrinks] = useState([]);
+  const [foods, setFoods] = useState();
+  const [drinks, setDrinks] = useState();
   const [categoryOn, setCategoryOn] = useState(false);
   const [backupCat, setBackupCat] = useState('');
 
