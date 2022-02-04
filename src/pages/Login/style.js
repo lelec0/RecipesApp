@@ -26,8 +26,8 @@ export const FormContainer = styled.form`
     outline: none;
     border-radius: 5px;
     padding: 1em;
-    font-family: inherit;
     transition: 0.4s ease-in;
+    /* font-family: inherit; */
 
     &:focus {
       border: 1px solid #961b20;
@@ -43,7 +43,7 @@ export const FormContainer = styled.form`
     cursor: pointer;
     color: white;
     transition: 0.4s ease;
-    font-family: inherit;
+    /* font-family: inherit; */
 
     &:hover {
       transform: scale(1.025);

@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import { Header, Footer } from '../../components';
 import RecipesContext from '../../context/RecipesContext';
+import { ExploreFoodContainer, ExploreFoodTitle } from './style';
 
 function ExploreFood({ history }) {
   const [randomFoodID, setRandomFoodID] = useState([]);
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
+
   useEffect(() => {
     setTitle('Explore Foods');
     setBtnSearchIcon(false);
@@ -29,7 +30,7 @@ function ExploreFood({ history }) {
   }, []);
 
   return (
-    <div>
+    <ExploreFoodContainer>
       <Header />
       <Link to="/explore/foods/ingredients">
         <button
@@ -54,8 +55,11 @@ function ExploreFood({ history }) {
       >
         Surprise me!
       </button>
+      <ExploreFoodTitle>
+        Explore Food
+      </ExploreFoodTitle>
       <Footer />
-    </div>
+    </ExploreFoodContainer>
   );
 }
 

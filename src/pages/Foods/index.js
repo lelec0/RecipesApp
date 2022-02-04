@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { CategoriesButton, FoodCard } from '../../components';
 import { CategoryContainer, FoodsContainer, MainContainer } from './style';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import { Header, Footer, CategoriesButton, FoodCard } from '../../components';
 import RecipesContext from '../../context/RecipesContext';
 import { requestCategory } from '../../services';
 
@@ -46,7 +44,6 @@ function Foods() {
           <CategoriesButton category={ { strCategory: 'All' } } />
         }
       </CategoryContainer>
-      {/* {console.log(foods) } */}
       <FoodsContainer>
         {
           foods
@@ -60,9 +57,8 @@ function Foods() {
             )
           ))
         }
-        {/* {console.log(categoryOn)} */}
         {
-          (foods.length === 1 && !categoryOn)
+          (foods && foods.length === 1 && !categoryOn)
           && history.push(`/foods/${foods[0].idMeal}`)
         }
       </FoodsContainer>

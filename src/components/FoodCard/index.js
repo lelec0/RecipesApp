@@ -5,8 +5,17 @@ import { FoodCardContainer, CardImage, CardButton, CardTitle } from './style';
 
 function FoodCard({ food, testID }) {
   const { strMeal, strMealThumb, idMeal } = food;
+
   return (
-    <FoodCardContainer data-testid={ `${testID}-recipe-card` }>
+    <FoodCardContainer
+      data-testid={ (
+        typeof testID === 'number' ? (
+          `${testID}-recipe-card`
+        ) : (
+          testID
+        )
+      ) }
+    >
       <Link to={ `/foods/${idMeal}` }>
         <CardButton type="button">
           <CardImage

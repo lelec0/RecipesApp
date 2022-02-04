@@ -24,3 +24,11 @@ export const HeaderButton = styled.button`
 
 export const HeaderImage = styled.img`
 `;
+
+export const SearchBarContainer = styled.div`
+
+`;
+
+export const SearchBarButton = styled.button`
+
+`;

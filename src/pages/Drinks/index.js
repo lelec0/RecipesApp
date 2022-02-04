@@ -47,17 +47,11 @@ function Drinks() {
       </CategoryContainer>
 
       <DrinksContainer>
-        {/* { console.log(drinks) } */}
-        {/* {
-          (drinks.length === 1)
-          && history.push('/explore/foods')
-        } */}
         {
-          (drinks)
+          drinks
           && drinks.map((drink, index) => (
             index < maxDrinks && (
               <DrinkCard
-                data-testid={ `${index}-recipe-card` }
                 key={ index }
                 drinks={ drink }
                 testID={ index }
@@ -66,7 +60,7 @@ function Drinks() {
           ))
         }
         {
-          (drinks.length === 1 && !categoryOn)
+          (drinks && drinks.length === 1 && !categoryOn)
           && history.push(`/drinks/${drinks[0].idDrink}`)
         }
       </DrinksContainer>

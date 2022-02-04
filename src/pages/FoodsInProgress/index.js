@@ -1,10 +1,13 @@
 import React from 'react';
+import { FoodsProgressContainer, FoodsProgressTitle } from './style';
 
 function FoodsInProgress() {
   return (
-    <div>
-      Foods
-    </div>
+    <FoodsProgressContainer>
+      <FoodsProgressTitle>
+        Foods In Progress
+      </FoodsProgressTitle>
+    </FoodsProgressContainer>
   );
 }
 

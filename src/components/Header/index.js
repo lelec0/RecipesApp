@@ -1,10 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Input } from '..';
+// import { Input } from '../../components';
+import Input from '../Input';
 import profileIcon from '../../assets/images/profileIcon.svg';
 import searchIcon from '../../assets/images/searchIcon.svg';
 import RecipesContext from '../../context/RecipesContext';
-import { HeaderButton, HeaderContainer, HeaderImage, HeaderTitle } from './style';
+import {
+  HeaderButton, HeaderContainer, HeaderImage, HeaderTitle,
+  SearchBarContainer, SearchBarButton,
+} from './style';
 
 function Header() {
   const { setSearch, title, setRadio,
@@ -70,7 +74,6 @@ function Header() {
       {
         btnSearchIcon ? (
           <HeaderButton
-            // data-testid="search-top-btn"
             type="button"
             onClick={ () => (
               showSearch === true ? setShowSearch(false) : setShowSearch(true)
@@ -92,10 +95,9 @@ function Header() {
           </HeaderButton>
         )
       }
-
       {
         showSearch && (
-          <div>
+          <SearchBarContainer>
             <Input inputValues={ objInputText } />
             <Input inputValues={ objInputCheckB1 } />
             Ingredients
@@ -104,14 +106,14 @@ function Header() {
             <Input inputValues={ objInputCheckB3 } />
             First Letter
 
-            <button
+            <SearchBarButton
               type="button"
               data-testid="exec-search-btn"
               onClick={ submitApi }
             >
               Search
-            </button>
-          </div>
+            </SearchBarButton>
+          </SearchBarContainer>
         )
       }
     </HeaderContainer>
