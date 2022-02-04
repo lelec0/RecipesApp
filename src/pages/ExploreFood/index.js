@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Header, Footer } from '../../components';
 import RecipesContext from '../../context/RecipesContext';
 import { ExploreFoodContainer, ExploreFoodTitle } from './style';
+import { randomMeal } from '../../services/index';
 
 function ExploreFood({ history }) {
   const [randomFoodID, setRandomFoodID] = useState([]);
@@ -14,19 +15,12 @@ function ExploreFood({ history }) {
     setBtnSearchIcon(false);
   }, [setTitle, setBtnSearchIcon]);
 
-  const requestRandomFood = async () => {
-    const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
-    const response = await fetch(URL);
-    const data = await response.json();
-    return data;
-  };
-
   const randomFood = () => {
     history.push(`/foods/${randomFoodID}`);
   };
 
   useEffect(() => {
-    requestRandomFood().then(({ meals }) => setRandomFoodID(meals[0].idMeal));
+    randomMeal().then(({ meals }) => setRandomFoodID(meals[0].idMeal));
   }, []);
 
   return (

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Header, Footer } from '../../components';
 import RecipesContext from '../../context/RecipesContext';
 import { ExploreDrinksContainer, ExploreDrinksTitle } from './style';
+import { randomDrink } from '../../services/index';
 
 function ExploreDrinks({ history }) {
   const [randomDrinkID, setRandomDrinkID] = useState([]);
@@ -14,19 +15,12 @@ function ExploreDrinks({ history }) {
     setBtnSearchIcon(false);
   }, [setTitle, setBtnSearchIcon]);
 
-  const requestRandomDrink = async () => {
-    const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
-    const response = await fetch(URL);
-    const data = await response.json();
-    return data;
-  };
-
-  const randomDrink = () => {
+  const randomDrinkClick = () => {
     history.push(`/drinks/${randomDrinkID}`);
   };
 
   useEffect(() => {
-    requestRandomDrink().then(({ drinks }) => setRandomDrinkID(drinks[0].idDrink));
+    randomDrink().then(({ drinks }) => setRandomDrinkID(drinks[0].idDrink));
   }, []);
 
   return (
@@ -42,7 +36,7 @@ function ExploreDrinks({ history }) {
       </Link>
       <button
         type="button"
-        onClick={ randomDrink }
+        onClick={ randomDrinkClick }
         data-testid="explore-surprise"
       >
         Surprise me!
