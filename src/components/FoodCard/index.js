@@ -4,9 +4,18 @@ import PropTypes from 'prop-types';
 import { FoodCardContainer, CardImage, CardButton, CardTitle } from './style';
 
 function FoodCard({ food, testID }) {
+  console.log(food);
   const { strMeal, strMealThumb, idMeal } = food;
   return (
-    <FoodCardContainer data-testid={ `${testID}-recipe-card` }>
+    <FoodCardContainer
+      data-testid={ (
+        typeof testID === 'number' ? (
+          `${testID}-recipe-card`
+        ) : (
+          testID
+        )
+      ) }
+    >
       <Link to={ `/foods/${idMeal}` }>
         <CardButton type="button">
           <CardImage

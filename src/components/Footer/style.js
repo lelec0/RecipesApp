@@ -11,6 +11,10 @@ export const FooterContainer = styled.footer`
   height: 70px;
 `;
 
+export const FooterImage = styled.img`
+
+`;
+
 export const FooterButton = styled.button`
   border: none;
   width: 64px;

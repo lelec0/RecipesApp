@@ -59,7 +59,6 @@ export async function foodIngredients(search) {
 export const foodNameFetch = async (search) => {
   const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;
   // console.log('toSERVICE');
-  console.log(URL);
   const response = await fetch(URL);
   const data = await response.json();
   if (data.meals === null) {
@@ -111,4 +110,25 @@ export const requestCategoriesDrinks = async () => {
   const response = await fetch(URL);
   const data = await response.json();
   return data.drinks;
+};
+
+export const getFoodById = async (id) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+};
+
+export const getDrinkById = async (id) => {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+};
+
+export const randomMeal = async () => {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
 };
