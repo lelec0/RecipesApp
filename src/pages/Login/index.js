@@ -14,7 +14,7 @@ function Login() {
     const validateTest = () => {
       const minLength = 6;
       const verifyEmail = /\S+@\S+\.\S+/;
-      if (password.length >= minLength && verifyEmail.test(email)) {
+      if (password.length > minLength && verifyEmail.test(email)) {
         setDisabled(false);
       } else {
         setDisabled(true);
