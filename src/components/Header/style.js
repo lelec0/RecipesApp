@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
-  background-color: #e82f3e;
-  box-shadow: 0 5px #961b20;
+  background-color: #97141a;
+  box-shadow: 0 5px #51060a;
   display: flex;
   width: 100%;
   height: 70px;
