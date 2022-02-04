@@ -62,7 +62,7 @@ function Foods() {
         }
         {/* {console.log(categoryOn)} */}
         {
-          (foods.length === 1 && !categoryOn)
+          (foods && foods.length === 1 && !categoryOn)
           && history.push(`/foods/${foods[0].idMeal}`)
         }
       </FoodsContainer>

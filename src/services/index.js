@@ -62,6 +62,9 @@ export const foodNameFetch = async (search) => {
   console.log(URL);
   const response = await fetch(URL);
   const data = await response.json();
+  if (data.meals === null) {
+    return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+  }
   return data;
 };
 
@@ -86,6 +89,9 @@ export const drinkIngredientFetch = async (search) => {
 export const drinkNameFetch = async (search) => {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`);
   const data = await response.json();
+  if (data.drinks === null) {
+    return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+  }
   return data;
 };
 
