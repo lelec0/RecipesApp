@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { CategoryContainer, FoodsContainer, MainContainer } from './style';
+import {
+  MainContainer,
+  CategoryContainerDefault,
+  CategoryContainer,
+  FoodsContainer,
+} from './style';
 import { Header, Footer, CategoriesButton, FoodCard } from '../../components';
 import RecipesContext from '../../context/RecipesContext';
 import { requestCategory } from '../../services';
 
 function Foods() {
   const { foods, categoryOn,
-    setTitle, setBtnSearchIcon } = useContext(RecipesContext);
+    setTitle, setBtnSearchIcon, searchBar } = useContext(RecipesContext);
   const [categories, setCategories] = useState();
   const history = useHistory();
 
@@ -28,22 +33,35 @@ function Foods() {
     setBtnSearchIcon(true);
   }, [setTitle, setBtnSearchIcon]);
 
+  const categoriesRender = () => (
+    categories.map((category, index) => (
+      index < maxCategories && (
+        <CategoriesButton key={ index } category={ category } />
+      )
+    ))
+  );
+
   return (
     <MainContainer>
       <Header />
-      <CategoryContainer>
-        {
-          categories
-          && categories.map((category, index) => (
-            index < maxCategories && (
-              <CategoriesButton key={ index } category={ category } />
-            )
-          ))
-        }
-        {
-          <CategoriesButton category={ { strCategory: 'All' } } />
-        }
-      </CategoryContainer>
+      {
+        searchBar
+          ? (
+            <CategoryContainer>
+              { categories && categoriesRender() }
+              {
+                <CategoriesButton category={ { strCategory: 'All' } } />
+              }
+            </CategoryContainer>
+          ) : (
+            <CategoryContainerDefault>
+              { categories && categoriesRender() }
+              {
+                <CategoriesButton category={ { strCategory: 'All' } } />
+              }
+            </CategoryContainerDefault>
+          )
+      }
       <FoodsContainer>
         {
           foods

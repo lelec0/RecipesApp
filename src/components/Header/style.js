@@ -9,6 +9,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-around;
   margin-bottom: 25px;
+  flex-wrap: wrap;
 `;
 
 export const HeaderTitle = styled.h1`
@@ -25,10 +26,10 @@ export const HeaderButton = styled.button`
 export const HeaderImage = styled.img`
 `;
 
-export const SearchBarContainer = styled.div`
-
-`;
-
-export const SearchBarButton = styled.button`
-
+export const HeaderSearchBar = styled.div`
+  margin-top: 10px;
+  padding: 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
