@@ -142,6 +142,7 @@ function RecipesProvider({ children }) {
     categoryHandle,
     searchBar,
     setSearchBar,
+    ingredientHandle,
   };
 
   return (
