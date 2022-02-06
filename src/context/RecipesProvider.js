@@ -103,6 +103,24 @@ function RecipesProvider({ children }) {
     }
   };
 
+  const ingredientsDrinksAPI = async (strIngredient) => {
+    const response = await drinkIngredientFetch(strIngredient);
+    setDrinks(response.drinks);
+  };
+
+  const ingredientsFoodsAPI = async (strIngredient) => {
+    const response = await foodIngredients(strIngredient);
+    setFoods(response.meals);
+  };
+
+  const ingredientHandle = async (strIngredient, type) => {
+    if (type === 'Drinks') {
+      ingredientsDrinksAPI(strIngredient);
+    } else if (type === 'Foods') {
+      ingredientsFoodsAPI(strIngredient);
+    }
+  };
+
   const values = {
     setCategoryOn,
     categoryOn,
