@@ -44,18 +44,9 @@ function Drinks() {
   return (
     <MainContainer>
       <Header />
-
       {
-        !searchBar
+        searchBar
           ? (
-            <CategoryContainerDefault>
-              { categories && categoriesRender() }
-              {
-                <CategoriesButton category={ { strCategory: 'All' } } />
-              }
-            </CategoryContainerDefault>
-          )
-          : (
             <CategoryContainer>
               { categories && categoriesRender() }
               {
@@ -63,8 +54,15 @@ function Drinks() {
               }
             </CategoryContainer>
           )
+          : (
+            <CategoryContainerDefault>
+              { categories && categoriesRender() }
+              {
+                <CategoriesButton category={ { strCategory: 'All' } } />
+              }
+            </CategoryContainerDefault>
+          )
       }
-
       <DrinksContainer>
         {
           drinks
