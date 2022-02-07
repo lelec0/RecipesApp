@@ -17,6 +17,8 @@ function RecipesProvider({ children }) {
   const [categoryOn, setCategoryOn] = useState(false);
   const [backupCat, setBackupCat] = useState('');
 
+  const [searchBar, setSearchBar] = useState(false);
+
   const setMealsApi = async () => {
     // console.log(radio);
     if (radio === 'Ingredients') {
@@ -138,6 +140,8 @@ function RecipesProvider({ children }) {
     drinks,
     setDrinks,
     categoryHandle,
+    searchBar,
+    setSearchBar,
     ingredientHandle,
   };
 

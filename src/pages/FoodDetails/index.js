@@ -14,6 +14,9 @@ import {
   FoodDetailsListItem,
   FoodDetailsInstructions,
   VideoFrame,
+  TopButtonsContainer,
+  StartRecipeButton,
+  BottomButtonsContainer,
 } from './style';
 
 function FoodDetails() {
@@ -68,18 +71,22 @@ function FoodDetails() {
         >
           { foodApi[0].strCategory }
         </FoodDetailsCategory>
-        <FoodDetailsButton
-          data-testid="share-btn"
-          type="button"
-        >
-          Share
-        </FoodDetailsButton>
-        <FoodDetailsButton
-          data-testid="favorite-btn"
-          type="button"
-        >
-          Favorites
-        </FoodDetailsButton>
+
+        <TopButtonsContainer>
+          <FoodDetailsButton
+            data-testid="share-btn"
+            type="button"
+          >
+            Share
+          </FoodDetailsButton>
+          <FoodDetailsButton
+            data-testid="favorite-btn"
+            type="button"
+          >
+            Favorites
+          </FoodDetailsButton>
+        </TopButtonsContainer>
+
         <FoodRecipeCategory data-testid="recipe-category">
           { foodApi.strCategory }
         </FoodRecipeCategory>
@@ -110,16 +117,18 @@ function FoodDetails() {
             />
           )
         }
-        <FoodCard
-          testID="0-recomendation-card"
-          food={ food }
-        />
-        <FoodDetailsButton
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          Start Recipe
-        </FoodDetailsButton>
+        <BottomButtonsContainer>
+          <FoodCard
+            testID="0-recomendation-card"
+            food={ food }
+          />
+          <StartRecipeButton
+            type="button"
+            data-testid="start-recipe-btn"
+          >
+            Start Recipe
+          </StartRecipeButton>
+        </BottomButtonsContainer>
       </FoodDetailsContainer>
     )
   );

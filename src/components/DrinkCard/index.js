@@ -1,28 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { DrinkCardContainer, CardImage, CardTitle } from './style';
+import { DrinkCardContainer, CardImage, CardTitle, CardButton } from './style';
 
 function DrinkCard({ drinks, testID }) {
   const { strDrink, strDrinkThumb, idDrink } = drinks;
 
   return (
     <DrinkCardContainer data-testid={ `${testID}-recipe-card` }>
-      <Link to={ `/drinks/${idDrink}` }>
-        <CardImage
-          data-testid={ (
-            typeof testID === 'number' ? (
-              `${testID}-card-img`
-            ) : (
-              testID
-            )
-          ) }
-          src={ strDrinkThumb }
-          alt={ strDrink }
-        />
-        <CardTitle data-testid={ `${testID}-card-name` }>
-          { strDrink }
-        </CardTitle>
+      <CardImage
+        data-testid={ (
+          typeof testID === 'number' ? (
+            `${testID}-card-img`
+          ) : (
+            testID
+          )
+        ) }
+        src={ strDrinkThumb }
+        alt={ strDrink }
+      />
+      <Link to={ `/drinks/${idDrink}` } style={ { textDecoration: 'none' } }>
+        <CardButton type="button">
+          <CardTitle data-testid={ `${testID}-card-name` }>
+            { strDrink }
+          </CardTitle>
+        </CardButton>
       </Link>
     </DrinkCardContainer>
 

@@ -12,6 +12,9 @@ import {
   DrinksList,
   DrinksListItem,
   DrinksInstructions,
+  StartRecipeButton,
+  BottomButtonsContainer,
+  TopButtonsContainer,
 } from './style';
 
 function DrinksDetails() {
@@ -58,21 +61,25 @@ function DrinksDetails() {
       >
         { drinkApi[0].strDrink }
       </DrinksDetailsTitle>
-      <DrinksDetailsButton
-        data-testid="share-btn"
-        type="button"
-      >
-        Share
-      </DrinksDetailsButton>
-      <DrinksDetailsButton
-        data-testid="favorite-btn"
-        type="button"
-      >
-        Favorites
-      </DrinksDetailsButton>
       <DrinksDetailsCategory data-testid="recipe-category">
         { drinkApi[0].strAlcoholic }
       </DrinksDetailsCategory>
+
+      <TopButtonsContainer>
+        <DrinksDetailsButton
+          data-testid="share-btn"
+          type="button"
+        >
+          Share
+        </DrinksDetailsButton>
+        <DrinksDetailsButton
+          data-testid="favorite-btn"
+          type="button"
+        >
+          Favorites
+        </DrinksDetailsButton>
+      </TopButtonsContainer>
+
       <DrinksList>
         {
           handleIngredient().map((drink, index) => (
@@ -94,16 +101,18 @@ function DrinksDetails() {
       <DrinksInstructions data-testid="instructions">
         { drinkApi[0].strInstructions }
       </DrinksInstructions>
-      <DrinkCard
-        drinks={ randomDrinkApi }
-        testID="0-recomendation-card"
-      />
-      <DrinksDetailsButton
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Start Recipe
-      </DrinksDetailsButton>
+      <BottomButtonsContainer>
+        <DrinkCard
+          drinks={ randomDrinkApi }
+          testID="0-recomendation-card"
+        />
+        <StartRecipeButton
+          type="button"
+          data-testid="start-recipe-btn"
+        >
+          Start Recipe
+        </StartRecipeButton>
+      </BottomButtonsContainer>
     </DrinksDetailsContainer>
   );
 }
