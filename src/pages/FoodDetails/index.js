@@ -16,6 +16,7 @@ import {
   VideoFrame,
   TopButtonsContainer,
   StartRecipeButton,
+  BottomButtonsContainer,
 } from './style';
 
 function FoodDetails() {
@@ -116,14 +117,7 @@ function FoodDetails() {
             />
           )
         }
-        <div
-          style={ {
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          } }
-        >
+        <BottomButtonsContainer>
           <FoodCard
             testID="0-recomendation-card"
             food={ food }
@@ -134,7 +128,7 @@ function FoodDetails() {
           >
             Start Recipe
           </StartRecipeButton>
-        </div>
+        </BottomButtonsContainer>
       </FoodDetailsContainer>
     )
   );
