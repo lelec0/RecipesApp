@@ -5,7 +5,7 @@ import {
   DrinksInProgress, Explore, ExploreFood, ExploreDrinks,
   ExploreFoodsIngredients, ExploreDrinksIngredients,
   Nationalities, Profile, DoneRecipes, FavoriteRecipes,
-  FoodDetails, DrinksDetails,
+  FoodDetails, DrinksDetails, NotFound,
 } from '../pages';
 
 function Routes() {
@@ -36,6 +36,7 @@ function Routes() {
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/done-recipes" component={ DoneRecipes } />
         <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+        <Route exact path="*" component={ NotFound } />
       </Switch>
     </BrowserRouter>
   );
