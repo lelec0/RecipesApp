@@ -10,7 +10,7 @@ function Nationalities() {
   const MAX_NUMBER = 12;
   const [nationalities, setNationalities] = useState([]);
   const [foodsByOrigin, setFoodsByOrigin] = useState([]);
-  const [dropDown, setDropDown] = useState('');
+  const [dropDown, setDropDown] = useState('All');
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
 
   const getAllFoodsNationalities = async () => {
@@ -20,12 +20,15 @@ function Nationalities() {
   };
 
   const getFoodsByOrigin = async (value) => {
-    const request = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${value}`);
-    const { meals } = await request.json();
+    // if (value === 'All') {
+    //   getAllFoodsNationalities();
+    // }
     if (value === 'All') {
       const allNationalities = await requestFoods();
       return setFoodsByOrigin(allNationalities.meals);
     }
+    const request = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${value}`);
+    const { meals } = await request.json();
     return setFoodsByOrigin(meals);
   };
 
@@ -41,6 +44,7 @@ function Nationalities() {
 
   const handleChange = ({ target }) => {
     const { value } = target;
+    console.log(value);
     setDropDown(value);
     getFoodsByOrigin(value);
   };
@@ -65,7 +69,7 @@ function Nationalities() {
               nationalities.map((item, index) => (
                 <option
                   key={ index }
-                  data-testid={ [`${index.strArea}-option`] }
+                  data-testid={ [`${item.strArea}-option`] }
                   value={ item.strArea }
                 >
                   {item.strArea}
@@ -77,10 +81,11 @@ function Nationalities() {
         {
           dropDown && foodsByOrigin
             .map((item, index) => {
+              console.log(item);
               if (index < MAX_NUMBER) {
                 return (
                   <Link
-                    to={ [`/foods/${item.idMeal}`] }
+                    to={ `/foods/${item.idMeal}` }
                     key={ index }
                     data-testid={ [`${index}-recipe-card`] }
                   >
