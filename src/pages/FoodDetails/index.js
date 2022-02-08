@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FoodCard } from '../../components';
+import RecommendationDrink from '../../components/RecommendationDrink';
 import RecipesContext from '../../context/RecipesContext';
-import { getFoodById, randomMeal } from '../../services';
+import { getFoodById, randomDrink } from '../../services';
 import {
   FoodDetailsContainer,
   FoodDetailsImage,
@@ -23,7 +23,7 @@ function FoodDetails() {
   const { id } = useParams();
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [foodApi, setFoodApi] = useState(false);
-  const [food, setFood] = useState({});
+  const [drinksRandom, setDrinksRandom] = useState();
 
   useEffect(() => {
     setTitle('Foods Details');
@@ -31,15 +31,16 @@ function FoodDetails() {
     const handleApi = async () => {
       try {
         const api = await getFoodById(id);
-        const randomFood = await randomMeal();
         setFoodApi(api.meals);
-        setFood(randomFood.meals[0]);
+        const MAX_RANDOM_DRINKS = 6;
+        const drinkRandom = await randomDrink(MAX_RANDOM_DRINKS);
+        setDrinksRandom(drinkRandom);
       } catch (error) {
         console.log(error);
       }
     };
     handleApi();
-  }, [setFoodApi, setFood, id, setTitle, setBtnSearchIcon]);
+  }, [setFoodApi, id, setTitle, setBtnSearchIcon]);
 
   const handleIngredient = () => (
     foodApi && Object.entries(foodApi[0]).filter((arrayEntrie) => (
@@ -52,6 +53,17 @@ function FoodDetails() {
       arrayEntrie[0].includes('strMeasure') && arrayEntrie[1] !== ' '
     ))
   );
+
+  const getId = (url) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    const number = 11;
+    if (match && match[2].length === number) {
+      const videoId = match[2];
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+    return '';
+  };
 
   return (
     foodApi && (
@@ -105,7 +117,7 @@ function FoodDetails() {
         <FoodDetailsInstructions data-testid="instructions">
           { foodApi[0].strInstructions }
         </FoodDetailsInstructions>
-        {
+        {/* {
           foodApi
           && (
             <VideoFrame
@@ -116,12 +128,31 @@ function FoodDetails() {
               src={ foodApi[0].strYoutube }
             />
           )
+        } */}
+        {
+          foodApi
+          && (
+            <VideoFrame
+              data-testid="video"
+              title="Recipe Video"
+              width="747"
+              height="420"
+              src={ getId(foodApi[0].strYoutube) }
+            />
+          )
         }
         <BottomButtonsContainer>
-          <FoodCard
-            testID="0-recomendation-card"
-            food={ food }
-          />
+          {
+            drinksRandom
+            && drinksRandom.map((drinkRandom, index) => (
+              <RecommendationDrink
+                key={ index }
+                testID="0-recomendation-card"
+                drinkRandom={ drinkRandom }
+                index={ index }
+              />
+            ))
+          }
           <StartRecipeButton
             type="button"
             data-testid="start-recipe-btn"

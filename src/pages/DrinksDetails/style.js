@@ -51,6 +51,8 @@ export const BottomButtonsContainer = styled.div`
 `;
 
 export const StartRecipeButton = styled.button`
+  position: fixed;
+  bottom: 0;
   margin: 1em;
   padding: 0.5em;
   border: none;

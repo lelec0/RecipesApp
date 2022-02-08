@@ -5,7 +5,7 @@ import { DrinkCardContainer, CardImage, CardTitle, CardButton } from './style';
 
 function DrinkCard({ drinks, testID }) {
   const { strDrink, strDrinkThumb, idDrink } = drinks;
-  console.log(drinks);
+
   return (
     <DrinkCardContainer>
       <CardImage

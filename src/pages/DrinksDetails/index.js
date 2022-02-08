@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { DrinkCard } from '../../components';
+import RecomendationFood from '../../components/RecomendationFood';
 import RecipesContext from '../../context/RecipesContext';
-import { getDrinkById, randomDrink } from '../../services';
+import { randomMeal, getDrinkById, requestFoods } from '../../services';
 import {
   DrinksDetailsContainer,
   DrinksDetailsImage,
@@ -22,7 +22,8 @@ function DrinksDetails() {
   /* https://backefront.com.br/como-usar-useparams-react/ tem q fazer por aqui por causa dos testes */
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [drinkApi, setDrinkApi] = useState(false);
-  const [randomDrinkApi, setRandomDrinkApi] = useState({});
+  const [randomFoodApi, setRandomFoodApi] = useState({});
+  const [foods, setFoods] = useState();
 
   useEffect(() => {
     setTitle('Drinks Details');
@@ -30,8 +31,12 @@ function DrinksDetails() {
 
     const handleApi = async () => {
       const api = await getDrinkById(id);
-      const drinkRecommendation = await randomDrink();
-      setRandomDrinkApi(drinkRecommendation.drinks[0]);
+      const foodsApi = await requestFoods();
+      setFoods(foodsApi);
+      // console.log(api);
+      const foodRecommendation = await randomMeal();
+      // console.log(foodRecommendation);
+      setRandomFoodApi(foodRecommendation.meals[0]);
       setDrinkApi(api.drinks);
     };
     handleApi();
@@ -48,6 +53,7 @@ function DrinksDetails() {
       arrayEntrie[0].includes('strMeasure') && arrayEntrie[1] !== ''
     ))
   );
+  const MAX_RECOMMENDATIONS = 6;
 
   return drinkApi && (
     <DrinksDetailsContainer>
@@ -102,10 +108,19 @@ function DrinksDetails() {
         { drinkApi[0].strInstructions }
       </DrinksInstructions>
       <BottomButtonsContainer>
-        <DrinkCard
-          drinks={ randomDrinkApi }
-          testID="0-recomendation-card"
-        />
+        {
+          foods
+          && foods.map((_food, index) => (
+            index > MAX_RECOMMENDATIONS && (
+              <RecomendationFood
+                food={ randomFoodApi }
+                testID="0-recomendation-card"
+                index={ index }
+              />
+            )
+          ))
+        }
+
         <StartRecipeButton
           type="button"
           data-testid="start-recipe-btn"

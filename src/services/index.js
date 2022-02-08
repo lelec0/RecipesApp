@@ -143,14 +143,36 @@ export const getDrinkById = async (id) => {
 
 export const randomMeal = async () => {
   const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
+  const response0 = await fetch(URL);
+  const data0 = await response0.json();
+  const response1 = await fetch(URL);
+  const data1 = await response1.json();
+  const response2 = await fetch(URL);
+  const data2 = await response2.json();
+  const response3 = await fetch(URL);
+  const data3 = await response3.json();
+  const response4 = await fetch(URL);
+  const data4 = await response4.json();
+  const response5 = await fetch(URL);
+  const data5 = await response5.json();
+  return [data0.drinks[0], data1.drinks[0],
+    data2.drinks[0], data3.drinks[0], data4.drinks[0], data5.drinks[0]];
 };
 
 export const randomDrink = async () => {
   const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
+  const response0 = await fetch(URL);
+  const data0 = await response0.json();
+  const response1 = await fetch(URL);
+  const data1 = await response1.json();
+  const response2 = await fetch(URL);
+  const data2 = await response2.json();
+  const response3 = await fetch(URL);
+  const data3 = await response3.json();
+  const response4 = await fetch(URL);
+  const data4 = await response4.json();
+  const response5 = await fetch(URL);
+  const data5 = await response5.json();
+  return [data0.drinks[0], data1.drinks[0],
+    data2.drinks[0], data3.drinks[0], data4.drinks[0], data5.drinks[0]];
 };
