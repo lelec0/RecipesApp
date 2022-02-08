@@ -143,14 +143,14 @@ export const getDrinkById = async (id) => {
 
 export const randomMeal = async () => {
   const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
+  const response0 = await fetch(URL);
+  const data0 = await response0.json();
+  return data0;
 };
 
 export const randomDrink = async () => {
   const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data;
+  const response0 = await fetch(URL);
+  const data0 = await response0.json();
+  return data0;
 };

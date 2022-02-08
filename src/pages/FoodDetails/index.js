@@ -1,29 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FoodCard } from '../../components';
+import RecommendationDrink from '../../components/RecommendationDrink';
 import RecipesContext from '../../context/RecipesContext';
-import { getFoodById, randomMeal } from '../../services';
+import { getFoodById } from '../../services';
+import SharingButtons from '../../components/SharingButtons';
 import {
   FoodDetailsContainer,
   FoodDetailsImage,
   FoodDetailsTitle,
-  FoodDetailsButton,
+  // FoodDetailsButton,
   FoodDetailsCategory,
   FoodRecipeCategory,
   FoodDetailsList,
   FoodDetailsListItem,
   FoodDetailsInstructions,
   VideoFrame,
-  TopButtonsContainer,
-  StartRecipeButton,
+  // TopButtonsContainer,
+  // StartRecipeButton,
   BottomButtonsContainer,
+  CarouselContainer,
 } from './style';
+import RecipeButton from '../../components/RecipeButton';
 
 function FoodDetails() {
+  const { href } = window.location;
   const { id } = useParams();
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [foodApi, setFoodApi] = useState(false);
-  const [food, setFood] = useState({});
+  // const [drinksRandom, setDrinksRandom] = useState();
+  const [test, setTest] = useState();
 
   useEffect(() => {
     setTitle('Foods Details');
@@ -31,15 +36,19 @@ function FoodDetails() {
     const handleApi = async () => {
       try {
         const api = await getFoodById(id);
-        const randomFood = await randomMeal();
         setFoodApi(api.meals);
-        setFood(randomFood.meals[0]);
+        // const drinkRandom = await randomDrink(MAX_RANDOM_DRINKS);
+        // setDrinksRandom(drinkRandom);
+        const drinkTest = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        const drinkTestJson = await drinkTest.json();
+        console.log(drinkTestJson);
+        setTest(drinkTestJson.drinks);
       } catch (error) {
         console.log(error);
       }
     };
     handleApi();
-  }, [setFoodApi, setFood, id, setTitle, setBtnSearchIcon]);
+  }, [setFoodApi, id, setTitle, setBtnSearchIcon]);
 
   const handleIngredient = () => (
     foodApi && Object.entries(foodApi[0]).filter((arrayEntrie) => (
@@ -53,6 +62,17 @@ function FoodDetails() {
     ))
   );
 
+  const getId = (url) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    const number = 11;
+    if (match && match[2].length === number) {
+      const videoId = match[2];
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+    return '';
+  };
+  const MAX_RANDOM_DRINKS = 6;
   return (
     foodApi && (
       <FoodDetailsContainer>
@@ -72,7 +92,7 @@ function FoodDetails() {
           { foodApi[0].strCategory }
         </FoodDetailsCategory>
 
-        <TopButtonsContainer>
+        {/* <TopButtonsContainer>
           <FoodDetailsButton
             data-testid="share-btn"
             type="button"
@@ -85,7 +105,12 @@ function FoodDetails() {
           >
             Favorites
           </FoodDetailsButton>
-        </TopButtonsContainer>
+        </TopButtonsContainer> */}
+        <SharingButtons
+          currentRecipe={ foodApi[0] }
+          types="food"
+          linkCopied={ href }
+        />
 
         <FoodRecipeCategory data-testid="recipe-category">
           { foodApi.strCategory }
@@ -105,7 +130,7 @@ function FoodDetails() {
         <FoodDetailsInstructions data-testid="instructions">
           { foodApi[0].strInstructions }
         </FoodDetailsInstructions>
-        {
+        {/* {
           foodApi
           && (
             <VideoFrame
@@ -116,18 +141,35 @@ function FoodDetails() {
               src={ foodApi[0].strYoutube }
             />
           )
+        } */}
+        {
+          foodApi
+          && (
+            <VideoFrame
+              data-testid="video"
+              title="Recipe Video"
+              width="747"
+              height="420"
+              src={ getId(foodApi[0].strYoutube) }
+            />
+          )
         }
         <BottomButtonsContainer>
-          <FoodCard
-            testID="0-recomendation-card"
-            food={ food }
-          />
-          <StartRecipeButton
-            type="button"
-            data-testid="start-recipe-btn"
-          >
-            Start Recipe
-          </StartRecipeButton>
+          <CarouselContainer>
+            {
+              test
+              && test.filter((_drink, index) => index < MAX_RANDOM_DRINKS)
+                .map((drinkRandom, index) => (
+                  <RecommendationDrink
+                    key={ index }
+                    // testID="0-recomendation-card"
+                    drinkRandom={ drinkRandom }
+                    index={ index }
+                  />
+                ))
+            }
+          </CarouselContainer>
+          <RecipeButton type="foods" id={ id } linkCopied={ href } />
         </BottomButtonsContainer>
       </FoodDetailsContainer>
     )
