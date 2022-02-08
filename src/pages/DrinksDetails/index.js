@@ -1,28 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { DrinkCard } from '../../components';
+import RecommendationFood from '../../components/RecomendationFood';
 import RecipesContext from '../../context/RecipesContext';
-import { getDrinkById, randomDrink } from '../../services';
+import { getDrinkById } from '../../services';
+import SharingButtons from '../../components/SharingButtons';
+import RecipeButton from '../../components/RecipeButton';
 import {
   DrinksDetailsContainer,
   DrinksDetailsImage,
   DrinksDetailsTitle,
-  DrinksDetailsButton,
+  // DrinksDetailsButton,
   DrinksDetailsCategory,
   DrinksList,
   DrinksListItem,
   DrinksInstructions,
-  StartRecipeButton,
+  // StartRecipeButton,
   BottomButtonsContainer,
-  TopButtonsContainer,
+  // TopButtonsContainer,
+  CarouselContainer,
 } from './style';
 
 function DrinksDetails() {
+  const { href } = window.location;
   const { id } = useParams();
   /* https://backefront.com.br/como-usar-useparams-react/ tem q fazer por aqui por causa dos testes */
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [drinkApi, setDrinkApi] = useState(false);
-  const [randomDrinkApi, setRandomDrinkApi] = useState({});
+  // const [randomFoodApi, setRandomFoodApi] = useState();
+  const [test, setTest] = useState();
 
   useEffect(() => {
     setTitle('Drinks Details');
@@ -30,8 +35,13 @@ function DrinksDetails() {
 
     const handleApi = async () => {
       const api = await getDrinkById(id);
-      const drinkRecommendation = await randomDrink();
-      setRandomDrinkApi(drinkRecommendation.drinks[0]);
+      // console.log(api);
+      // const foodRecommendation = await randomMeal();
+      const testFood = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      const testFoodJson = await testFood.json();
+      setTest(testFoodJson.meals);
+      // console.log(foodRecommendation);
+      // setRandomFoodApi(foodRecommendation);
       setDrinkApi(api.drinks);
     };
     handleApi();
@@ -48,7 +58,7 @@ function DrinksDetails() {
       arrayEntrie[0].includes('strMeasure') && arrayEntrie[1] !== ''
     ))
   );
-
+  const MAX_RECOMENDATIONS = 6;
   return drinkApi && (
     <DrinksDetailsContainer>
       <DrinksDetailsImage
@@ -65,7 +75,7 @@ function DrinksDetails() {
         { drinkApi[0].strAlcoholic }
       </DrinksDetailsCategory>
 
-      <TopButtonsContainer>
+      {/* <TopButtonsContainer>
         <DrinksDetailsButton
           data-testid="share-btn"
           type="button"
@@ -78,8 +88,12 @@ function DrinksDetails() {
         >
           Favorites
         </DrinksDetailsButton>
-      </TopButtonsContainer>
-
+      </TopButtonsContainer> */}
+      <SharingButtons
+        currentRecipe={ drinkApi[0] }
+        types="drink"
+        linkCopied={ href }
+      />
       <DrinksList>
         {
           handleIngredient().map((drink, index) => (
@@ -102,16 +116,26 @@ function DrinksDetails() {
         { drinkApi[0].strInstructions }
       </DrinksInstructions>
       <BottomButtonsContainer>
-        <DrinkCard
-          drinks={ randomDrinkApi }
-          testID="0-recomendation-card"
-        />
-        <StartRecipeButton
+        <CarouselContainer>
+          {
+            test
+            && test.filter((_food, index) => index < MAX_RECOMENDATIONS)
+              .map((foodRandom, index) => (
+                <RecommendationFood
+                  key={ index }
+                  food={ foodRandom }
+                  index={ index }
+                />
+              ))
+          }
+        </CarouselContainer>
+        {/* <StartRecipeButton
           type="button"
           data-testid="start-recipe-btn"
         >
           Start Recipe
-        </StartRecipeButton>
+        </StartRecipeButton> */}
+        <RecipeButton type="drinks" id={ id } linkCopied={ href } />
       </BottomButtonsContainer>
     </DrinksDetailsContainer>
   );

@@ -51,6 +51,8 @@ export const BottomButtonsContainer = styled.div`
 `;
 
 export const StartRecipeButton = styled.button`
+  position: fixed;
+  bottom: 0;
   margin: 1em;
   padding: 0.5em;
   border: none;
@@ -58,4 +60,10 @@ export const StartRecipeButton = styled.button`
   background-color: #97141a;
   color: white;
   width: 90%;
+`;
+
+export const CarouselContainer = styled.div`
+  display: flex;
+  overflow-x: scroll;
+  width: 8em
 `;
