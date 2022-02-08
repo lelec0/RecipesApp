@@ -11,6 +11,12 @@ function RecipeButton({ typeArr, type, id }) {
   const history = useHistory();
   const [doneRecipe, setDoneRecipe] = useState(false);
   const [link, setLink] = useState(type);
+  const [isloading, setIsloading] = useState(true);
+
+  useEffect(() => {
+    setIsloading(false);
+  }, [doneRecipe]);
+
   useEffect(() => {
     if (type === 'meals') {
       setLink('foods');
@@ -34,12 +40,14 @@ function RecipeButton({ typeArr, type, id }) {
   };
 
   return (
-    <StartRecipeButton
-      data-testid="start-recipe-btn"
-      onClick={ () => { addDoneRecipe(doneRecipe); } }
-    >
-      { doneRecipe ? 'Continue Recipe' : 'Start Recipe' }
-    </StartRecipeButton>
+    !isloading && (
+      <StartRecipeButton
+        data-testid="start-recipe-btn"
+        onClick={ () => { addDoneRecipe(doneRecipe); } }
+      >
+        { doneRecipe ? 'Continue Recipe' : 'Start Recipe' }
+      </StartRecipeButton>
+    )
   );
 }
 
