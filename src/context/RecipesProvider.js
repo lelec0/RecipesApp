@@ -44,7 +44,7 @@ function RecipesProvider({ children }) {
       setDrinks(response.drinks);
     } else if (radio === 'FirstLetter') {
       const response = await drinkFirstLetterFetch(search);
-      setDrinks(response);
+      setDrinks(response.drinks);
     } else if (radio === 'Name') {
       const response = await drinkNameFetch(search);
       setDrinks(response.drinks);
