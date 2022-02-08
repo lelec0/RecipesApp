@@ -3,18 +3,19 @@ import { useParams } from 'react-router-dom';
 import RecommendationFood from '../../components/RecomendationFood';
 import RecipesContext from '../../context/RecipesContext';
 import { getDrinkById } from '../../services';
+import SharingButtons from '../../components/SharingButtons';
 import {
   DrinksDetailsContainer,
   DrinksDetailsImage,
   DrinksDetailsTitle,
-  DrinksDetailsButton,
+  // DrinksDetailsButton,
   DrinksDetailsCategory,
   DrinksList,
   DrinksListItem,
   DrinksInstructions,
   StartRecipeButton,
   BottomButtonsContainer,
-  TopButtonsContainer,
+  // TopButtonsContainer,
   CarouselContainer,
 } from './style';
 
@@ -72,7 +73,7 @@ function DrinksDetails() {
         { drinkApi[0].strAlcoholic }
       </DrinksDetailsCategory>
 
-      <TopButtonsContainer>
+      {/* <TopButtonsContainer>
         <DrinksDetailsButton
           data-testid="share-btn"
           type="button"
@@ -85,8 +86,11 @@ function DrinksDetails() {
         >
           Favorites
         </DrinksDetailsButton>
-      </TopButtonsContainer>
-
+      </TopButtonsContainer> */}
+      <SharingButtons
+        currentRecipe={ drinkApi[0] }
+        types="drink"
+      />
       <DrinksList>
         {
           handleIngredient().map((drink, index) => (

@@ -3,18 +3,19 @@ import { useParams } from 'react-router-dom';
 import RecommendationDrink from '../../components/RecommendationDrink';
 import RecipesContext from '../../context/RecipesContext';
 import { getFoodById } from '../../services';
+import SharingButtons from '../../components/SharingButtons';
 import {
   FoodDetailsContainer,
   FoodDetailsImage,
   FoodDetailsTitle,
-  FoodDetailsButton,
+  // FoodDetailsButton,
   FoodDetailsCategory,
   FoodRecipeCategory,
   FoodDetailsList,
   FoodDetailsListItem,
   FoodDetailsInstructions,
   VideoFrame,
-  TopButtonsContainer,
+  // TopButtonsContainer,
   StartRecipeButton,
   BottomButtonsContainer,
   CarouselContainer,
@@ -89,7 +90,7 @@ function FoodDetails() {
           { foodApi[0].strCategory }
         </FoodDetailsCategory>
 
-        <TopButtonsContainer>
+        {/* <TopButtonsContainer>
           <FoodDetailsButton
             data-testid="share-btn"
             type="button"
@@ -102,7 +103,11 @@ function FoodDetails() {
           >
             Favorites
           </FoodDetailsButton>
-        </TopButtonsContainer>
+        </TopButtonsContainer> */}
+        <SharingButtons
+          currentRecipe={ foodApi[0] }
+          types="food"
+        />
 
         <FoodRecipeCategory data-testid="recipe-category">
           { foodApi.strCategory }
