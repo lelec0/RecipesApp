@@ -3,7 +3,19 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import StartRecipeButton from './style';
 
-// const copy = require('clipboard-copy');
+function foodsStorage(storage, type, id) {
+  if (storage && type === 'foods') {
+    const findFoodnOnStorage = Object.keys(storage.meals)
+      .find((foodStoreKey) => foodStoreKey === id);
+    return findFoodnOnStorage !== undefined;
+  }
+  if (storage && type === 'drinks') {
+    const findDrinkOnStorage = Object.keys(storage.cocktails)
+      .find((drinkStoreKey) => drinkStoreKey === id);
+    return findDrinkOnStorage !== undefined;
+  }
+  return false;
+}
 
 function RecipeButton({ type, id, linkCopied }) {
   console.log(linkCopied);
@@ -12,24 +24,12 @@ function RecipeButton({ type, id, linkCopied }) {
   const [inProgressDrinkRecipeLoad, setInProgressDrinkRecipeLoad] = useState(false);
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (storage && type === 'foods') {
-      const findFoodnOnStorage = Object.keys(storage.meals)
-        .find((foodStoreKey) => foodStoreKey === id);
-      return findFoodnOnStorage ? setInProgress(true) : setInProgress(false);
-    }
-    if (storage && type === 'drinks') {
-      const findDrinkOnStorage = Object.keys(storage.cocktails)
-        .find((drinkStoreKey) => drinkStoreKey === id);
-      return findDrinkOnStorage ? setInProgress(true) : setInProgress(false);
-    }
+    setInProgress(foodsStorage(storage, type, id));
   }, [id, type]);
 
   const handleClick = () => {
     if (type === 'foods') setInProgressFoodRecipeLoad(true);
     if (type === 'drinks') setInProgressDrinkRecipeLoad(true);
-    // linkCopied.select();
-    // copy(linkCopied);
-    // global.alert('Link copied!');
   };
 
   return (
@@ -40,7 +40,6 @@ function RecipeButton({ type, id, linkCopied }) {
         onClick={ handleClick }
       >
         {inProgress ? 'Continue Recipe' : 'Start Recipe'}
-        {/* {copyLink && <span>Link Copied!</span>} */}
       </StartRecipeButton>
       {inProgressFoodRecipeLoad && <Redirect to={ `/foods/${id}/in-progress` } />}
       {inProgressDrinkRecipeLoad && <Redirect to={ `/drinks/${id}/in-progress` } />}
