@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import RecommendationDrink from '../../components/RecommendationDrink';
 import RecipesContext from '../../context/RecipesContext';
-import { getFoodById, randomDrink } from '../../services';
+import { getFoodById } from '../../services';
 import {
   FoodDetailsContainer,
   FoodDetailsImage,
@@ -23,7 +23,8 @@ function FoodDetails() {
   const { id } = useParams();
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [foodApi, setFoodApi] = useState(false);
-  const [drinksRandom, setDrinksRandom] = useState();
+  // const [drinksRandom, setDrinksRandom] = useState();
+  const [test, setTest] = useState();
 
   useEffect(() => {
     setTitle('Foods Details');
@@ -32,9 +33,12 @@ function FoodDetails() {
       try {
         const api = await getFoodById(id);
         setFoodApi(api.meals);
-        const MAX_RANDOM_DRINKS = 6;
-        const drinkRandom = await randomDrink(MAX_RANDOM_DRINKS);
-        setDrinksRandom(drinkRandom);
+        // const drinkRandom = await randomDrink(MAX_RANDOM_DRINKS);
+        // setDrinksRandom(drinkRandom);
+        const drinkTest = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        const drinkTestJson = await drinkTest.json();
+        console.log(drinkTestJson);
+        setTest(drinkTestJson.drinks);
       } catch (error) {
         console.log(error);
       }
@@ -64,7 +68,7 @@ function FoodDetails() {
     }
     return '';
   };
-
+  const MAX_RANDOM_DRINKS = 6;
   return (
     foodApi && (
       <FoodDetailsContainer>
@@ -143,15 +147,16 @@ function FoodDetails() {
         }
         <BottomButtonsContainer>
           {
-            drinksRandom
-            && drinksRandom.map((drinkRandom, index) => (
-              <RecommendationDrink
-                key={ index }
-                testID="0-recomendation-card"
-                drinkRandom={ drinkRandom }
-                index={ index }
-              />
-            ))
+            test
+            && test.filter((_drink, index) => index < MAX_RANDOM_DRINKS)
+              .map((drinkRandom, index) => (
+                <RecommendationDrink
+                  key={ index }
+                  // testID="0-recomendation-card"
+                  drinkRandom={ drinkRandom }
+                  index={ index }
+                />
+              ))
           }
           <StartRecipeButton
             type="button"

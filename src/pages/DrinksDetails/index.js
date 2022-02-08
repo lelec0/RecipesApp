@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import RecomendationFood from '../../components/RecomendationFood';
+import RecommendationFood from '../../components/RecomendationFood';
 import RecipesContext from '../../context/RecipesContext';
-import { randomMeal, getDrinkById, requestFoods } from '../../services';
+import { getDrinkById } from '../../services';
 import {
   DrinksDetailsContainer,
   DrinksDetailsImage,
@@ -22,8 +22,8 @@ function DrinksDetails() {
   /* https://backefront.com.br/como-usar-useparams-react/ tem q fazer por aqui por causa dos testes */
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [drinkApi, setDrinkApi] = useState(false);
-  const [randomFoodApi, setRandomFoodApi] = useState({});
-  const [foods, setFoods] = useState();
+  // const [randomFoodApi, setRandomFoodApi] = useState();
+  const [test, setTest] = useState();
 
   useEffect(() => {
     setTitle('Drinks Details');
@@ -31,12 +31,13 @@ function DrinksDetails() {
 
     const handleApi = async () => {
       const api = await getDrinkById(id);
-      const foodsApi = await requestFoods();
-      setFoods(foodsApi);
       // console.log(api);
-      const foodRecommendation = await randomMeal();
+      // const foodRecommendation = await randomMeal();
+      const testFood = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      const testFoodJson = await testFood.json();
+      setTest(testFoodJson.meals);
       // console.log(foodRecommendation);
-      setRandomFoodApi(foodRecommendation.meals[0]);
+      // setRandomFoodApi(foodRecommendation);
       setDrinkApi(api.drinks);
     };
     handleApi();
@@ -53,8 +54,7 @@ function DrinksDetails() {
       arrayEntrie[0].includes('strMeasure') && arrayEntrie[1] !== ''
     ))
   );
-  const MAX_RECOMMENDATIONS = 6;
-
+  const MAX_RECOMENDATIONS = 6;
   return drinkApi && (
     <DrinksDetailsContainer>
       <DrinksDetailsImage
@@ -109,16 +109,15 @@ function DrinksDetails() {
       </DrinksInstructions>
       <BottomButtonsContainer>
         {
-          foods
-          && foods.map((_food, index) => (
-            index > MAX_RECOMMENDATIONS && (
-              <RecomendationFood
-                food={ randomFoodApi }
-                testID="0-recomendation-card"
+          test
+          && test.filter((_food, index) => index < MAX_RECOMENDATIONS)
+            .map((foodRandom, index) => (
+              <RecommendationFood
+                key={ index }
+                food={ foodRandom }
                 index={ index }
               />
-            )
-          ))
+            ))
         }
 
         <StartRecipeButton

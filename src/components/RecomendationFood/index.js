@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FoodCardContainer, CardImage, CardButton, CardTitle } from './style';
 
-function RecomendationFood({ food, testID, index }) {
+function RecommendationFood({ food, index }) {
   console.log(food);
   const { strMeal, strMealThumb, idMeal } = food;
 
   return (
     <FoodCardContainer
-      data-testid={ testID }
+      data-testid={ `${index}-recomendation-card` }
     >
       <Link to={ `/foods/${idMeal}` } style={ { textDecoration: 'none' } }>
         <CardButton type="button">
@@ -19,7 +19,7 @@ function RecomendationFood({ food, testID, index }) {
             alt={ strMeal }
           />
           <CardTitle
-            data-testid={ `${index}-recipe-card` }
+            data-testid={ `${index}-recomendation-title` }
           >
             {strMeal}
           </CardTitle>
@@ -30,8 +30,8 @@ function RecomendationFood({ food, testID, index }) {
   );
 }
 
-RecomendationFood.propTypes = {
-  testID: PropTypes.string.isRequired,
+RecommendationFood.propTypes = {
+  // testID: PropTypes.string.isRequired,
   food: PropTypes.shape({
     strMeal: PropTypes.string.isRequired,
     strMealThumb: PropTypes.string.isRequired,
@@ -40,4 +40,4 @@ RecomendationFood.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-export default RecomendationFood;
+export default RecommendationFood;

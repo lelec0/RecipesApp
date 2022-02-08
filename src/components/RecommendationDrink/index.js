@@ -3,18 +3,17 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { DrinkCardContainer, CardImage, CardTitle } from './style';
 
-function RecommendationDrink({ drinkRandom, testID, index }) {
+function RecommendationDrink({ drinkRandom, index }) {
   const { strDrink, strDrinkThumb, idDrink } = drinkRandom;
   return (
-    <DrinkCardContainer data-testid={ `${testID}-recipe-card` }>
-
+    <DrinkCardContainer data-testid={ `${index}-recomendation-card` }>
       <Link to={ `/drinks/${idDrink}` }>
         <CardImage
           data-testid={ `${index}-card-img` }
           src={ strDrinkThumb }
           alt={ strDrink }
         />
-        <CardTitle data-testid={ `${index}-card-name` }>
+        <CardTitle data-testid={ `${index}-recomendation-title` }>
           { strDrink }
         </CardTitle>
       </Link>
@@ -24,7 +23,7 @@ function RecommendationDrink({ drinkRandom, testID, index }) {
 }
 
 RecommendationDrink.propTypes = {
-  testID: PropTypes.string.isRequired,
+  // testID: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   drinkRandom: PropTypes.shape({
     idDrink: PropTypes.string.isRequired,

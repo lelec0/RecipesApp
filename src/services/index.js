@@ -145,6 +145,7 @@ export const randomMeal = async () => {
   const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
   const response0 = await fetch(URL);
   const data0 = await response0.json();
+  console.log(data0);
   const response1 = await fetch(URL);
   const data1 = await response1.json();
   const response2 = await fetch(URL);
@@ -155,8 +156,8 @@ export const randomMeal = async () => {
   const data4 = await response4.json();
   const response5 = await fetch(URL);
   const data5 = await response5.json();
-  return [data0.drinks[0], data1.drinks[0],
-    data2.drinks[0], data3.drinks[0], data4.drinks[0], data5.drinks[0]];
+  return [data0.meals[0], data1.meals[0],
+    data2.meals[0], data3.meals[0], data4.meals[0], data5.meals[0]];
 };
 
 export const randomDrink = async () => {
