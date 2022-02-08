@@ -15,6 +15,7 @@ import {
   StartRecipeButton,
   BottomButtonsContainer,
   TopButtonsContainer,
+  CarouselContainer,
 } from './style';
 
 function DrinksDetails() {
@@ -108,18 +109,19 @@ function DrinksDetails() {
         { drinkApi[0].strInstructions }
       </DrinksInstructions>
       <BottomButtonsContainer>
-        {
-          test
-          && test.filter((_food, index) => index < MAX_RECOMENDATIONS)
-            .map((foodRandom, index) => (
-              <RecommendationFood
-                key={ index }
-                food={ foodRandom }
-                index={ index }
-              />
-            ))
-        }
-
+        <CarouselContainer>
+          {
+            test
+            && test.filter((_food, index) => index < MAX_RECOMENDATIONS)
+              .map((foodRandom, index) => (
+                <RecommendationFood
+                  key={ index }
+                  food={ foodRandom }
+                  index={ index }
+                />
+              ))
+          }
+        </CarouselContainer>
         <StartRecipeButton
           type="button"
           data-testid="start-recipe-btn"

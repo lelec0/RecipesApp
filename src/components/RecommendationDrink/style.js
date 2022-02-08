@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 
+// export const DrinkCardContainer = styled.div`
+//   width: 40%;
+//   margin: 8px 16px;
+//   border: none;
+//   box-shadow: 3px 3px 3px #cbcbcb;
+//   border-radius: 5px;
+// `;
 export const DrinkCardContainer = styled.div`
-  width: 40%;
-  margin: 8px 16px;
+  padding: '14px';
+  textDecoration: 'none';
+  margin: 8px 24px;
   border: none;
   box-shadow: 3px 3px 3px #cbcbcb;
   border-radius: 5px;

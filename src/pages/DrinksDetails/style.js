@@ -61,3 +61,9 @@ export const StartRecipeButton = styled.button`
   color: white;
   width: 90%;
 `;
+
+export const CarouselContainer = styled.div`
+  display: flex;
+  overflow-x: scroll;
+  width: 8em
+`;
