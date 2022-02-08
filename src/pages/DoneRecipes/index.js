@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Header } from '../../components';
 import DoneCard from '../../components/DoneCard';
 import RecipesContext from '../../context/RecipesContext';
@@ -24,8 +24,8 @@ function DoneRecipes() {
         filtered = recipesDone;
       }
       return (
-        filtered.map((elem, index) => (
-          <DoneCard key={ index } objDetail={ elem } index={ index } />
+        filtered.map((_, index) => (
+          <DoneCard key={ index } index={ index } />
         ))
       );
     }
