@@ -21,6 +21,7 @@ import {
 } from './style';
 
 function DrinksDetails() {
+  const { href } = window.location;
   const { id } = useParams();
   /* https://backefront.com.br/como-usar-useparams-react/ tem q fazer por aqui por causa dos testes */
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
@@ -91,6 +92,7 @@ function DrinksDetails() {
       <SharingButtons
         currentRecipe={ drinkApi[0] }
         types="drink"
+        linkCopied={ href }
       />
       <DrinksList>
         {
@@ -133,7 +135,7 @@ function DrinksDetails() {
         >
           Start Recipe
         </StartRecipeButton> */}
-        <RecipeButton type="drinks" id={ id } />
+        <RecipeButton type="drinks" id={ id } linkCopied={ href } />
       </BottomButtonsContainer>
     </DrinksDetailsContainer>
   );

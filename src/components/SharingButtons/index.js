@@ -11,10 +11,13 @@ import {
 } from '../../services/favoriteRecipes';
 // https://stackoverflow.com/questions/69572613/how-to-wrap-the-initialisation-of-an-array-in-its-own-usememo-hook
 
-function SharingButtons({ currentRecipe, types }) {
+const copy = require('clipboard-copy');
+
+function SharingButtons({ currentRecipe, types, linkCopied }) {
   const [HeartIcon, setHeartIcon] = useState(false);
   const [recipeData, setRecipeData] = useState({});
   const [isloading, setIsloading] = useState(true);
+  const [copyLink, setCopyLink] = useState(false);
 
   useEffect(() => {
     if (types === 'food') {
@@ -68,18 +71,26 @@ function SharingButtons({ currentRecipe, types }) {
     }
   };
 
+  const handleClick = () => {
+    copy(linkCopied);
+    // global.alert('Link copied!');
+    setCopyLink(true);
+  };
+
   return (
     !isloading
     && (
       <div>
         <ButtonContainer
           type="button"
+          onClick={ handleClick }
+          data-testid="share-btn"
         >
           <img
-            data-testid="share-btn"
             src={ shareIcon }
             alt="share-button"
           />
+          {copyLink && <span>Link copied!</span>}
         </ButtonContainer>
         <ButtonContainer
           onClick={ () => addFavorite(HeartIcon) }
@@ -109,6 +120,7 @@ SharingButtons.propTypes = {
     strAlcoholic: PropTypes.string,
   }).isRequired,
   types: PropTypes.string.isRequired,
+  linkCopied: PropTypes.string.isRequired,
 };
 
 export default SharingButtons;

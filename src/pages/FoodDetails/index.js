@@ -23,6 +23,7 @@ import {
 import RecipeButton from '../../components/RecipeButton';
 
 function FoodDetails() {
+  const { href } = window.location;
   const { id } = useParams();
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [foodApi, setFoodApi] = useState(false);
@@ -108,6 +109,7 @@ function FoodDetails() {
         <SharingButtons
           currentRecipe={ foodApi[0] }
           types="food"
+          linkCopied={ href }
         />
 
         <FoodRecipeCategory data-testid="recipe-category">
@@ -167,7 +169,7 @@ function FoodDetails() {
                 ))
             }
           </CarouselContainer>
-          <RecipeButton type="foods" id={ id } />
+          <RecipeButton type="foods" id={ id } linkCopied={ href } />
         </BottomButtonsContainer>
       </FoodDetailsContainer>
     )
