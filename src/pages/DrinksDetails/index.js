@@ -4,6 +4,7 @@ import RecommendationFood from '../../components/RecomendationFood';
 import RecipesContext from '../../context/RecipesContext';
 import { getDrinkById } from '../../services';
 import SharingButtons from '../../components/SharingButtons';
+import RecipeButton from '../../components/RecipeButton';
 import {
   DrinksDetailsContainer,
   DrinksDetailsImage,
@@ -13,7 +14,7 @@ import {
   DrinksList,
   DrinksListItem,
   DrinksInstructions,
-  StartRecipeButton,
+  // StartRecipeButton,
   BottomButtonsContainer,
   // TopButtonsContainer,
   CarouselContainer,
@@ -126,12 +127,13 @@ function DrinksDetails() {
               ))
           }
         </CarouselContainer>
-        <StartRecipeButton
+        {/* <StartRecipeButton
           type="button"
           data-testid="start-recipe-btn"
         >
           Start Recipe
-        </StartRecipeButton>
+        </StartRecipeButton> */}
+        <RecipeButton type="drinks" id={ id } />
       </BottomButtonsContainer>
     </DrinksDetailsContainer>
   );

@@ -16,10 +16,11 @@ import {
   FoodDetailsInstructions,
   VideoFrame,
   // TopButtonsContainer,
-  StartRecipeButton,
+  // StartRecipeButton,
   BottomButtonsContainer,
   CarouselContainer,
 } from './style';
+import RecipeButton from '../../components/RecipeButton';
 
 function FoodDetails() {
   const { id } = useParams();
@@ -166,12 +167,7 @@ function FoodDetails() {
                 ))
             }
           </CarouselContainer>
-          <StartRecipeButton
-            type="button"
-            data-testid="start-recipe-btn"
-          >
-            Start Recipe
-          </StartRecipeButton>
+          <RecipeButton type="foods" id={ id } />
         </BottomButtonsContainer>
       </FoodDetailsContainer>
     )
