@@ -10,7 +10,7 @@ import styled from 'styled-components';
 export const FoodCardContainer = styled.div`
 padding: '14px';
 textDecoration: 'none';
-margin: 8px 24px;
+margin: 8px 16px;
 border: none;
 box-shadow: 3px 3px 3px #cbcbcb;
 border-radius: 5px;
