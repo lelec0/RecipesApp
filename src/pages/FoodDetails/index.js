@@ -8,15 +8,12 @@ import {
   FoodDetailsContainer,
   FoodDetailsImage,
   FoodDetailsTitle,
-  // FoodDetailsButton,
   FoodDetailsCategory,
   FoodRecipeCategory,
   FoodDetailsList,
   FoodDetailsListItem,
   FoodDetailsInstructions,
   VideoFrame,
-  // TopButtonsContainer,
-  // StartRecipeButton,
   BottomButtonsContainer,
   CarouselContainer,
 } from './style';
@@ -37,11 +34,8 @@ function FoodDetails() {
       try {
         const api = await getFoodById(id);
         setFoodApi(api.meals);
-        // const drinkRandom = await randomDrink(MAX_RANDOM_DRINKS);
-        // setDrinksRandom(drinkRandom);
         const drinkTest = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
         const drinkTestJson = await drinkTest.json();
-        console.log(drinkTestJson);
         setTest(drinkTestJson.drinks);
       } catch (error) {
         console.log(error);
@@ -91,27 +85,11 @@ function FoodDetails() {
         >
           { foodApi[0].strCategory }
         </FoodDetailsCategory>
-
-        {/* <TopButtonsContainer>
-          <FoodDetailsButton
-            data-testid="share-btn"
-            type="button"
-          >
-            Share
-          </FoodDetailsButton>
-          <FoodDetailsButton
-            data-testid="favorite-btn"
-            type="button"
-          >
-            Favorites
-          </FoodDetailsButton>
-        </TopButtonsContainer> */}
         <SharingButtons
           currentRecipe={ foodApi[0] }
           types="food"
           linkCopied={ href }
         />
-
         <FoodRecipeCategory data-testid="recipe-category">
           { foodApi.strCategory }
         </FoodRecipeCategory>
@@ -130,18 +108,6 @@ function FoodDetails() {
         <FoodDetailsInstructions data-testid="instructions">
           { foodApi[0].strInstructions }
         </FoodDetailsInstructions>
-        {/* {
-          foodApi
-          && (
-            <VideoFrame
-              data-testid="video"
-              title="Recipe Video"
-              width="747"
-              height="420"
-              src={ foodApi[0].strYoutube }
-            />
-          )
-        } */}
         {
           foodApi
           && (

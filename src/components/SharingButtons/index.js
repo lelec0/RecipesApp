@@ -61,7 +61,6 @@ function SharingButtons({ currentRecipe, types, linkCopied }) {
   }, [recipeData]);
 
   const addFavorite = (value) => {
-    // console.log(HeartIcon);
     if (!value) {
       addRecipesToFavorites(recipeData);
       setHeartIcon(true);
