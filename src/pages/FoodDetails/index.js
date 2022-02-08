@@ -18,6 +18,9 @@ import {
   CarouselContainer,
 } from './style';
 import RecipeButton from '../../components/RecipeButton';
+import {
+  isRecipeDone,
+} from '../../services/doneRecipes';
 
 function FoodDetails() {
   const { href } = window.location;
@@ -66,6 +69,9 @@ function FoodDetails() {
     }
     return '';
   };
+
+  const getIngr = () => (handleIngredient().map((r) => r[1]));
+
   const MAX_RANDOM_DRINKS = 6;
   return (
     foodApi && (
@@ -135,7 +141,14 @@ function FoodDetails() {
                 ))
             }
           </CarouselContainer>
-          <RecipeButton type="foods" id={ id } linkCopied={ href } />
+          {
+            isRecipeDone(foodApi[0]).length === 0
+            && <RecipeButton
+              typeArr={ getIngr() }
+              type="meals"
+              id={ id }
+            />
+          }
         </BottomButtonsContainer>
       </FoodDetailsContainer>
     )

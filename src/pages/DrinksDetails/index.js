@@ -19,6 +19,9 @@ import {
   // TopButtonsContainer,
   CarouselContainer,
 } from './style';
+import {
+  isRecipeDone,
+} from '../../services/doneRecipes';
 
 function DrinksDetails() {
   const { href } = window.location;
@@ -58,6 +61,9 @@ function DrinksDetails() {
       arrayEntrie[0].includes('strMeasure') && arrayEntrie[1] !== ''
     ))
   );
+
+  const getIngr = () => (handleIngredient().map((r) => r[1]));
+
   const MAX_RECOMENDATIONS = 6;
   return drinkApi && (
     <DrinksDetailsContainer>
@@ -75,20 +81,6 @@ function DrinksDetails() {
         { drinkApi[0].strAlcoholic }
       </DrinksDetailsCategory>
 
-      {/* <TopButtonsContainer>
-        <DrinksDetailsButton
-          data-testid="share-btn"
-          type="button"
-        >
-          Share
-        </DrinksDetailsButton>
-        <DrinksDetailsButton
-          data-testid="favorite-btn"
-          type="button"
-        >
-          Favorites
-        </DrinksDetailsButton>
-      </TopButtonsContainer> */}
       <SharingButtons
         currentRecipe={ drinkApi[0] }
         types="drink"
@@ -129,13 +121,14 @@ function DrinksDetails() {
               ))
           }
         </CarouselContainer>
-        {/* <StartRecipeButton
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          Start Recipe
-        </StartRecipeButton> */}
-        <RecipeButton type="drinks" id={ id } linkCopied={ href } />
+        {
+          isRecipeDone(drinkApi[0]).length === 0
+            && <RecipeButton
+              typeArr={ getIngr() }
+              type="cocktails"
+              id={ id }
+            />
+        }
       </BottomButtonsContainer>
     </DrinksDetailsContainer>
   );

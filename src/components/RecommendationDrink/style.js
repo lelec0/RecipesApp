@@ -7,6 +7,7 @@ import styled from 'styled-components';
 //   box-shadow: 3px 3px 3px #cbcbcb;
 //   border-radius: 5px;
 // `;
+
 export const DrinkCardContainer = styled.div`
   padding: '14px';
   textDecoration: 'none';
