@@ -5,9 +5,9 @@ import { DrinkCardContainer, CardImage, CardTitle, CardButton } from './style';
 
 function DrinkCard({ drinks, testID }) {
   const { strDrink, strDrinkThumb, idDrink } = drinks;
-
+  console.log(drinks);
   return (
-    <DrinkCardContainer data-testid={ `${testID}-recipe-card` }>
+    <DrinkCardContainer>
       <CardImage
         data-testid={ (
           typeof testID === 'number' ? (
@@ -19,7 +19,11 @@ function DrinkCard({ drinks, testID }) {
         src={ strDrinkThumb }
         alt={ strDrink }
       />
-      <Link to={ `/drinks/${idDrink}` } style={ { textDecoration: 'none' } }>
+      <Link
+        to={ `/drinks/${idDrink}` }
+        style={ { textDecoration: 'none' } }
+        data-testid={ `${testID}-recipe-card` }
+      >
         <CardButton type="button">
           <CardTitle data-testid={ `${testID}-card-name` }>
             { strDrink }
