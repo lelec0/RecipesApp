@@ -1,4 +1,4 @@
-const readDoneRecipesArrs = () => (
+export const readDoneRecipesArrs = () => (
   JSON.parse(localStorage.getItem('doneRecipes')) || []
 );
 
