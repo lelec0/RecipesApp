@@ -1,4 +1,4 @@
-const readFavoriteRecipesArrs = () => (
+export const readFavoriteRecipesArrs = () => (
   JSON.parse(localStorage.getItem('favoriteRecipes')) || []
 );
 
@@ -28,10 +28,19 @@ export const removeRecipesFromFavorites = (currentRecipeObj) => {
   saveFavoriteRecipes(newFavoriteRecipes);
 };
 
-export const isRecipeFavorite = (recipes) => (
-  readFavoriteRecipesArrs()
+export const isRecipeFavorite = (recipes) => {
+  const getRecipe = readFavoriteRecipesArrs()
     .filter((recipe) => (
-      recipe.id === recipes.id && recipe.type === recipes.type)));
+      recipe.id === recipes.id && recipe.type === recipes.type));
+  return getRecipe.length !== 0;
+};
+
+// export const isRecipeFavorite = (recipes) => (
+//   readFavoriteRecipesArrs()
+//     .filter((recipe) => (
+//       recipe.id === recipes.id && recipe.type === recipes.type)));
+
+// export const recipeFavorite = (recipes) => (isRecipeFavorite(recipes).length === 0);
 
 // recipes = array
 // export const isRecipeFavorite = () => (recipes.reduce((acc, recipe) => {

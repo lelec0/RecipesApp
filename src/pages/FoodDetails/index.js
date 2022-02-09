@@ -95,6 +95,8 @@ function FoodDetails() {
           currentRecipe={ foodApi[0] }
           types="food"
           linkCopied={ href }
+          testID="teste"
+          isDetail
         />
         <FoodRecipeCategory data-testid="recipe-category">
           { foodApi.strCategory }

@@ -4,19 +4,20 @@ import PropTypes from 'prop-types';
 import {
   DoneCardContainer,
   CardImage,
+  CardButton,
   CardTitle,
   ImageContainer,
   CardContainer,
   TextContainer,
 } from './style';
 import { ShareButton } from '..';
+import FavoriteButton from '../FavoriteButton';
 
-function DoneCard({ element, index }) {
+function FavoriteCard({ element, index, click }) {
   const [link, setLink] = useState('foods');
   const { id, type, category, nationality,
-    alcoholicOrNot, name, image, doneDate, tags } = element;
+    alcoholicOrNot, name, image } = element;
   const [isloading, setIsloading] = useState(true);
-  const maxtags = 2;
 
   useEffect(() => {
     setIsloading(false);
@@ -35,11 +36,13 @@ function DoneCard({ element, index }) {
       <DoneCardContainer>
         <ImageContainer>
           <Link to={ `/${link}/${id}` } style={ { textDecoration: 'none' } }>
-            <CardImage
-              data-testid={ `${index}-horizontal-image` }
-              src={ image }
-              alt={ image }
-            />
+            <CardButton type="button">
+              <CardImage
+                data-testid={ `${index}-horizontal-image` }
+                src={ image }
+                alt={ image }
+              />
+            </CardButton>
           </Link>
         </ImageContainer>
         <CardContainer>
@@ -54,40 +57,32 @@ function DoneCard({ element, index }) {
                   {alcoholicOrNot}
                 </TextContainer>)
           }
+          <Link to={ `/${link}/${id}` } style={ { textDecoration: 'none' } }>
+            <CardButton type="button">
+              <CardTitle data-testid={ `${index}-horizontal-name` }>
+                {name}
+              </CardTitle>
+            </CardButton>
+          </Link>
           <ShareButton
             testID={ `${index}-horizontal-share-btn` }
             linkCopied={ `http://localhost:3000/${link}/${id}` }
           />
-          <Link to={ `/${link}/${id}` } style={ { textDecoration: 'none' } }>
-            <CardTitle data-testid={ `${index}-horizontal-name` }>
-              {name}
-            </CardTitle>
-          </Link>
-          <TextContainer data-testid={ `${index}-horizontal-done-date` }>
-            {doneDate}
-          </TextContainer>
-          {
-            tags
-              && tags.map((tag, i) => (
-                i < maxtags && (
-                  <span
-                    data-testid={ `${index}-${tag}-horizontal-tag` }
-                    key={ i }
-                  >
-                    {tag}
-                  </span>
-                )
-              ))
-          }
+          <FavoriteButton
+            currentRecipe={ element }
+            type="food"
+            testID={ `${index}-horizontal-favorite-btn` }
+            click={ click }
+          />
         </CardContainer>
-
       </DoneCardContainer>
     )
   );
 }
 
-DoneCard.propTypes = {
+FavoriteCard.propTypes = {
   index: PropTypes.string.isRequired,
+  click: PropTypes.func.isRequired,
   element: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -96,21 +91,7 @@ DoneCard.propTypes = {
     alcoholicOrNot: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    doneDate: PropTypes.string,
-    tags: PropTypes.string,
   }).isRequired,
 };
 
-export default DoneCard;
-
-// [{
-//   id: id-da-receita,
-//   type: comida-ou-bebida,
-//   nationality: nacionalidade-da-receita-ou-texto-vazio,
-//   category: categoria-da-receita-ou-texto-vazio,
-//   alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
-//   name: nome-da-receita,
-//   image: imagem-da-receita,
-//   doneDate: quando-a-receita-foi-concluida,
-//   tags: array-de-tags-da-receita-ou-array-vazio
-// }]
+export default FavoriteCard;
