@@ -13,7 +13,7 @@ import {
 
 const copy = require('clipboard-copy');
 
-function SharingButtons({ isDetail, testID, currentRecipe, types, linkCopied }) {
+function SharingButtons({ currentRecipe, types, linkCopied }) {
   const [HeartIcon, setHeartIcon] = useState(false);
   const [recipeData, setRecipeData] = useState({});
   const [isloading, setIsloading] = useState(true);
@@ -84,30 +84,18 @@ function SharingButtons({ isDetail, testID, currentRecipe, types, linkCopied }) 
           <img
             src={ shareIcon }
             alt="share-button"
-            data-testid={ `${testID}-horizontal-share-btn` }
           />
           {copyLink && <span>Link copied!</span>}
         </ButtonContainer>
         <ButtonContainer
           onClick={ () => addFavorite(HeartIcon) }
         >
-          {
-            isDetail ? (
-              <img
-                data-testid="favorite-btn"
-                src={ HeartIcon
-                  ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite-btn"
-              />
-            ) : (
-              <img
-                data-testid={ `${testID}-horizontal-favorite-btn` }
-                src={ HeartIcon
-                  ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite-btn"
-              />
-            )
-          }
+          <img
+            data-testid="favorite-btn"
+            src={ HeartIcon
+              ? blackHeartIcon : whiteHeartIcon }
+            alt="favorite-btn"
+          />
         </ButtonContainer>
       </div>
     )
@@ -128,8 +116,6 @@ SharingButtons.propTypes = {
   }).isRequired,
   types: PropTypes.string.isRequired,
   linkCopied: PropTypes.string.isRequired,
-  testID: PropTypes.string.isRequired,
-  isDetail: PropTypes.bool.isRequired,
 };
 
 export default SharingButtons;

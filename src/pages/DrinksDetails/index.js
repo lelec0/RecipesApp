@@ -85,8 +85,6 @@ function DrinksDetails() {
         currentRecipe={ drinkApi[0] }
         types="drink"
         linkCopied={ href }
-        testID="teste"
-        isDetail
       />
       <DrinksList>
         {
