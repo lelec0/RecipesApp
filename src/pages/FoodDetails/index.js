@@ -8,19 +8,19 @@ import {
   FoodDetailsContainer,
   FoodDetailsImage,
   FoodDetailsTitle,
-  // FoodDetailsButton,
   FoodDetailsCategory,
   FoodRecipeCategory,
   FoodDetailsList,
   FoodDetailsListItem,
   FoodDetailsInstructions,
   VideoFrame,
-  // TopButtonsContainer,
-  // StartRecipeButton,
   BottomButtonsContainer,
   CarouselContainer,
 } from './style';
 import RecipeButton from '../../components/RecipeButton';
+import {
+  isRecipeDone,
+} from '../../services/doneRecipes';
 
 function FoodDetails() {
   const { href } = window.location;
@@ -37,11 +37,8 @@ function FoodDetails() {
       try {
         const api = await getFoodById(id);
         setFoodApi(api.meals);
-        // const drinkRandom = await randomDrink(MAX_RANDOM_DRINKS);
-        // setDrinksRandom(drinkRandom);
         const drinkTest = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
         const drinkTestJson = await drinkTest.json();
-        console.log(drinkTestJson);
         setTest(drinkTestJson.drinks);
       } catch (error) {
         console.log(error);
@@ -53,7 +50,7 @@ function FoodDetails() {
   const handleIngredient = () => (
     foodApi && Object.entries(foodApi[0]).filter((arrayEntrie) => (
       arrayEntrie[0].includes('strIngredient') && arrayEntrie[1] !== ''
-    ))
+    )).filter((e) => e[1] !== null)
   );
 
   const handlestrMeasure = () => (
@@ -72,6 +69,10 @@ function FoodDetails() {
     }
     return '';
   };
+
+  // const getIngr = () => (handleIngredient().map((r) => r[1]));
+  const arr = [];
+
   const MAX_RANDOM_DRINKS = 6;
   return (
     foodApi && (
@@ -91,27 +92,11 @@ function FoodDetails() {
         >
           { foodApi[0].strCategory }
         </FoodDetailsCategory>
-
-        {/* <TopButtonsContainer>
-          <FoodDetailsButton
-            data-testid="share-btn"
-            type="button"
-          >
-            Share
-          </FoodDetailsButton>
-          <FoodDetailsButton
-            data-testid="favorite-btn"
-            type="button"
-          >
-            Favorites
-          </FoodDetailsButton>
-        </TopButtonsContainer> */}
         <SharingButtons
           currentRecipe={ foodApi[0] }
           types="food"
           linkCopied={ href }
         />
-
         <FoodRecipeCategory data-testid="recipe-category">
           { foodApi.strCategory }
         </FoodRecipeCategory>
@@ -130,18 +115,6 @@ function FoodDetails() {
         <FoodDetailsInstructions data-testid="instructions">
           { foodApi[0].strInstructions }
         </FoodDetailsInstructions>
-        {/* {
-          foodApi
-          && (
-            <VideoFrame
-              data-testid="video"
-              title="Recipe Video"
-              width="747"
-              height="420"
-              src={ foodApi[0].strYoutube }
-            />
-          )
-        } */}
         {
           foodApi
           && (
@@ -169,7 +142,14 @@ function FoodDetails() {
                 ))
             }
           </CarouselContainer>
-          <RecipeButton type="foods" id={ id } linkCopied={ href } />
+          {
+            isRecipeDone(foodApi[0]).length === 0
+            && <RecipeButton
+              typeArr={ arr }
+              type="meals"
+              id={ id }
+            />
+          }
         </BottomButtonsContainer>
       </FoodDetailsContainer>
     )

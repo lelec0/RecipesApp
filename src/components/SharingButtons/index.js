@@ -53,15 +53,10 @@ function SharingButtons({ currentRecipe, types, linkCopied }) {
   }, [HeartIcon]);
 
   useEffect(() => {
-    if (isRecipeFavorite(recipeData).length === 0) {
-      setHeartIcon(false);
-    } else {
-      setHeartIcon(true);
-    }
+    setHeartIcon(isRecipeFavorite(recipeData));
   }, [recipeData]);
 
   const addFavorite = (value) => {
-    // console.log(HeartIcon);
     if (!value) {
       addRecipesToFavorites(recipeData);
       setHeartIcon(true);

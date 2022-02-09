@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { FoodCardContainer, CardImage, CardButton, CardTitle } from './style';
 
 function RecommendationFood({ food, index }) {
-  console.log(food);
   const { strMeal, strMealThumb, idMeal } = food;
 
   return (
