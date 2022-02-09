@@ -26,6 +26,14 @@ import {
   addRecipesToDones,
 } from '../../services/doneRecipes';
 
+function lintEuTeAMO(checked, ingredient, id) {
+  if (checked) {
+    addIngredient('meals', id, ingredient);
+  } else {
+    removeIngredient('meals', id, ingredient);
+  }
+}
+
 function FoodsInProgress() {
   const { id } = useParams();
   const history = useHistory();
@@ -68,18 +76,6 @@ function FoodsInProgress() {
     ))
   );
 
-  const handleChange = (checked, ingredient) => {
-    if (checked) {
-      addIngredient('meals', id, ingredient);
-      setLen(JSON.parse(localStorage.getItem('inProgressRecipes'))
-        .meals[id].length);
-    } else {
-      removeIngredient('meals', id, ingredient);
-      setLen(JSON.parse(localStorage.getItem('inProgressRecipes'))
-        .meals[id].length);
-    }
-  };
-
   const getIngr = () => (handleIngredient().map((r) => r[1]));
 
   const handleFinished = () => {
@@ -100,6 +96,12 @@ function FoodsInProgress() {
       addRecipesToDones(Obj);
       history.push('/done-recipes');
     }
+  };
+
+  const handleChange = (checked, ingredient) => {
+    lintEuTeAMO(checked, ingredient, id);
+    setLen(JSON.parse(localStorage.getItem('inProgressRecipes'))
+      .meals[id].length);
   };
 
   return (
@@ -123,7 +125,7 @@ function FoodsInProgress() {
         <SharingButtons
           currentRecipe={ foodApi[0] }
           types="food"
-          linkCopied={ href }
+          linkCopied={ `http://localhost:3000/foods/${id}` }
         />
         <FoodRecipeCategory data-testid="recipe-category">
           { foodApi.strCategory }
@@ -168,8 +170,9 @@ function FoodsInProgress() {
           { foodApi[0].strInstructions }
         </FoodDetailsInstructions>
         {
+          // solução de quem claramente esta com sono
           getIngr().length === len
-            && (
+            ? (
               <BottomButtonsContainer>
                 <StartRecipeButton
                   type="button"
@@ -179,8 +182,34 @@ function FoodsInProgress() {
                   Finish Recipe
                 </StartRecipeButton>
               </BottomButtonsContainer>
+            ) : (
+              <BottomButtonsContainer>
+                <StartRecipeButton
+                  type="button"
+                  data-testid="finish-recipe-btn"
+                  onClick={ handleFinished }
+                  disabled
+                >
+                  Finish Recipe
+                </StartRecipeButton>
+              </BottomButtonsContainer>
             )
         }
+        {/* <BottomButtonsContainer>
+          <StartRecipeButton
+            type="button"
+            data-testid="finish-recipe-btn"
+            onClick={ handleFinished }
+            disabled={ () => {
+              if (getIngr().length === len) {
+                return false;
+              }
+              return true;
+            } }
+          >
+            Finish Recipe
+          </StartRecipeButton>
+        </BottomButtonsContainer> */}
       </FoodDetailsContainer>
     )
   );

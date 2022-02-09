@@ -25,6 +25,14 @@ import {
   addRecipesToDones,
 } from '../../services/doneRecipes';
 
+function lintEuTeAMO(checked, ingredient, id) {
+  if (checked) {
+    addIngredient('cocktails', id, ingredient);
+  } else {
+    removeIngredient('cocktails', id, ingredient);
+  }
+}
+
 function DrinksDetails() {
   const history = useHistory();
   const { href } = window.location;
@@ -65,15 +73,9 @@ function DrinksDetails() {
   );
 
   const handleChange = (checked, ingredient) => {
-    if (checked) {
-      addIngredient('cocktails', id, ingredient);
-      setLen(JSON.parse(localStorage.getItem('inProgressRecipes'))
-        .cocktails[id].length);
-    } else {
-      removeIngredient('cocktails', id, ingredient);
-      setLen(JSON.parse(localStorage.getItem('inProgressRecipes'))
-        .cocktails[id].length);
-    }
+    lintEuTeAMO(checked, ingredient, id);
+    setLen(JSON.parse(localStorage.getItem('inProgressRecipes'))
+      .cocktails[id].length);
   };
 
   const getIngr = () => (handleIngredient().map((r) => r[1]));
@@ -118,7 +120,7 @@ function DrinksDetails() {
       <SharingButtons
         currentRecipe={ drinkApi[0] }
         types="drink"
-        linkCopied={ href }
+        linkCopied={ `http://localhost:3000/drinks/${id}` }
       />
       <DrinksList>
         {
@@ -155,13 +157,25 @@ function DrinksDetails() {
         { drinkApi[0].strInstructions }
       </DrinksInstructions>
       {
+      // solução de quem claramente esta com sono
         getIngr().length === len
-          && (
+          ? (
             <BottomButtonsContainer>
               <StartRecipeButton
                 type="button"
                 data-testid="finish-recipe-btn"
                 onClick={ handleFinished }
+              >
+                Finish Recipe
+              </StartRecipeButton>
+            </BottomButtonsContainer>
+          ) : (
+            <BottomButtonsContainer>
+              <StartRecipeButton
+                type="button"
+                data-testid="finish-recipe-btn"
+                onClick={ handleFinished }
+                disabled
               >
                 Finish Recipe
               </StartRecipeButton>
