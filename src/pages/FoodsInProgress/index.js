@@ -37,7 +37,6 @@ function lintEuTeAMO(checked, ingredient, id) {
 function FoodsInProgress() {
   const { id } = useParams();
   const history = useHistory();
-  const { href } = window.location;
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [foodApi, setFoodApi] = useState(false);
   const [len, setLen] = useState(0);

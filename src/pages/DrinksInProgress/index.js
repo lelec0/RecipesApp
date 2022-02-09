@@ -35,7 +35,6 @@ function lintEuTeAMO(checked, ingredient, id) {
 
 function DrinksDetails() {
   const history = useHistory();
-  const { href } = window.location;
   const { id } = useParams();
   const { setTitle, setBtnSearchIcon } = useContext(RecipesContext);
   const [drinkApi, setDrinkApi] = useState(false);
