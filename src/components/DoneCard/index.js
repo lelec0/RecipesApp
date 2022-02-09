@@ -87,7 +87,7 @@ function DoneCard({ element, index }) {
 }
 
 DoneCard.propTypes = {
-  index: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   element: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,

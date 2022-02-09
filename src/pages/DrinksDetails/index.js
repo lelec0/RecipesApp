@@ -53,7 +53,7 @@ function DrinksDetails() {
   const handleIngredient = () => (
     drinkApi && Object.entries(drinkApi[0]).filter((arrayEntrie) => (
       arrayEntrie[0].includes('strIngredient') && arrayEntrie[1] !== null
-    ))
+    )).filter((e) => e[1] !== '')
   );
 
   const handlestrMeasure = () => (
@@ -62,7 +62,8 @@ function DrinksDetails() {
     ))
   );
 
-  const getIngr = () => (handleIngredient().map((r) => r[1]));
+  // const getIngr = () => (handleIngredient().map((r) => r[1]));
+  const arr = [];
 
   const MAX_RECOMENDATIONS = 6;
   return drinkApi && (
@@ -124,7 +125,7 @@ function DrinksDetails() {
         {
           isRecipeDone(drinkApi[0]).length === 0
             && <RecipeButton
-              typeArr={ getIngr() }
+              typeArr={ arr }
               type="cocktails"
               id={ id }
             />

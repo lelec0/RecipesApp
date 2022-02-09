@@ -50,7 +50,7 @@ function FoodDetails() {
   const handleIngredient = () => (
     foodApi && Object.entries(foodApi[0]).filter((arrayEntrie) => (
       arrayEntrie[0].includes('strIngredient') && arrayEntrie[1] !== ''
-    ))
+    )).filter((e) => e[1] !== null)
   );
 
   const handlestrMeasure = () => (
@@ -70,7 +70,8 @@ function FoodDetails() {
     return '';
   };
 
-  const getIngr = () => (handleIngredient().map((r) => r[1]));
+  // const getIngr = () => (handleIngredient().map((r) => r[1]));
+  const arr = [];
 
   const MAX_RANDOM_DRINKS = 6;
   return (
@@ -144,7 +145,7 @@ function FoodDetails() {
           {
             isRecipeDone(foodApi[0]).length === 0
             && <RecipeButton
-              typeArr={ getIngr() }
+              typeArr={ arr }
               type="meals"
               id={ id }
             />

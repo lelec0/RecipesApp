@@ -8,22 +8,22 @@ function DrinkCard({ drinks, testID }) {
 
   return (
     <DrinkCardContainer>
-      <CardImage
-        data-testid={ (
-          typeof testID === 'number' ? (
-            `${testID}-card-img`
-          ) : (
-            testID
-          )
-        ) }
-        src={ strDrinkThumb }
-        alt={ strDrink }
-      />
       <Link
         to={ `/drinks/${idDrink}` }
         style={ { textDecoration: 'none' } }
         data-testid={ `${testID}-recipe-card` }
       >
+        <CardImage
+          data-testid={ (
+            typeof testID === 'number' ? (
+              `${testID}-card-img`
+            ) : (
+              testID
+            )
+          ) }
+          src={ strDrinkThumb }
+          alt={ strDrink }
+        />
         <CardButton type="button">
           <CardTitle data-testid={ `${testID}-card-name` }>
             { strDrink }

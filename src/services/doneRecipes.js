@@ -23,6 +23,13 @@ export const removeRecipesFromDones = (currentRecipeObj) => {
   saveDoneRecipes(newDoneRecipes);
 };
 
+export const recipeIsDone = (recipes) => {
+  const getRecipe = readDoneRecipesArrs()
+    .filter((recipe) => (
+      recipe.id === recipes.id && recipe.type === recipes.type));
+  return getRecipe.length !== 0;
+};
+
 export const isRecipeDone = (recipes) => (
   readDoneRecipesArrs()
     .filter((recipe) => (

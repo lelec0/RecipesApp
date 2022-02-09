@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import StartRecipeButton from './style';
 import {
-  addRecipesToInProgresss,
+  addRecipesToInProgress,
   isRecipeInProgress,
-} from '../../services/inProgressRecipes ';
+} from '../../services/inProgressRecipes';
 
 function RecipeButton({ typeArr, type, id }) {
   const history = useHistory();
@@ -32,7 +32,7 @@ function RecipeButton({ typeArr, type, id }) {
 
   const addDoneRecipe = (val) => {
     if (!val) {
-      addRecipesToInProgresss(type, id, typeArr);
+      addRecipesToInProgress(type, id, typeArr);
       history.push(`/${link}/${id}/in-progress`);
     } else {
       history.push(`/${link}/${id}/in-progress`);
