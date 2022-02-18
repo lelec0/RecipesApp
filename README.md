@@ -14,7 +14,7 @@ O projeto está agora em reestruturação do codigo, como implementação de nov
 - Trello
 - Slack
 - Zoom
-- 
+
 ## Instalação
 1. instalar as dependência necessárias para o projeto: ```npm install``` ou ```yarn install```
 2. iniciar localmente na sua máquina o projeto: ```npm start``` ou ```yarn start```
