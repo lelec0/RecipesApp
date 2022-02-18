@@ -1,5 +1,5 @@
 ## App de Receitas
-É um app para consulta de receitas, que usa 2 APIS para comida e bebida, o app foi feito para uma tela de 360x640.
+É um app para consulta de receitas, que usa 2 APIS uma para [comida](https://www.themealdb.com/api.php) e outra para [bebida](https://www.thecocktaildb.com/api.php), o app foi feito para uma tela de 360x640.
 
 Projeto feito em grupo, minha maior contribuição na lógica usada do projeto, porém a reestruturação do codigo, como implementação de novas funcionalidades vai ser feito exclusivamente por min.
 
@@ -18,8 +18,9 @@ Projeto feito em grupo, minha maior contribuição na lógica usada do projeto, 
 Ongoing.
 
 ## To-do list
-- Refatoração completa da organização do código, pricipalmente os componentes
-- criar um hook de loading, e um para api
-- aplicar o jquery e o firebase no projeto
-- padronizar o css
-- terminar o css e deixar completamente funcional
+- Terminar de implementar a lógica de token para API (para fins de aprendizagem).
+- Refatoração completa da organização do código, pricipalmente os componentes.
+- Criar um hook de loading, e um para api.
+- Aplicar o jquery e o firebase no projeto.
+- Aplicar uma lógca de container no css, assim padronizando o mesmo.
+- Finalizar o css e deixar completamente funcional.
