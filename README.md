@@ -1,7 +1,7 @@
 ## App de Receitas
 É um app para consulta de receitas, que usa 2 APIS uma para [comida](https://www.themealdb.com/api.php) e outra para [bebida](https://www.thecocktaildb.com/api.php), o app foi feito para uma tela de 360x640.
 
-Projeto feito em grupo de 4 pessoas, o gerenciamento de versão do mesmo foi feito pelo github, minha maior contribuição foi a lógica usada do projeto.
+Projeto feito em grupo de 4 pessoas, o gerenciamento de versão do mesmo foi feito pelo github, e minha maior contribuição foi a lógica usada do projeto.
 
 O projeto está agora em reestruturação do codigo, como implementação de novas funcionalidades que vai ser feito exclusivamente por min.
 
